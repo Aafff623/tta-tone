@@ -26,6 +26,7 @@
 - 段落、换行和列表是否真正提升可读性。
 - 标题是否直接说明内容，而不是自行制造文案感。
 - 结尾是否添加了没有新信息的感悟或价值总结。
+- 是否出现固定开场、空泛重要性、模糊归因、聊天残留和通用乐观结尾等常见 AI 表达。
 
 ## 安装
 
@@ -66,9 +67,9 @@ cp -R oil-tone/skills/oil-tone ~/.codex/skills/oil-tone
 
 如果我们准备把它改成自己的文风，可以 fork 仓库，再调整 `skills/oil-tone/SKILL.md` 中的叙述身份、称呼习惯和禁用表达。
 
-## 确定性检查
+## 脚本检查
 
-Skill 附带一个只使用 Python 标准库的检查脚本。它会识别已经确认的坏表达：
+Skill 附带一个只使用 Python 标准库的检查脚本。`FAIL` 表示已经确认的问题，会让脚本返回失败；`WARN` 表示需要结合上下文判断的常见 AI 表达，不会单独让脚本失败：
 
 ```bash
 python3 ~/.codex/skills/oil-tone/scripts/tone_lint.py draft.md
@@ -80,7 +81,7 @@ python3 ~/.codex/skills/oil-tone/scripts/tone_lint.py draft.md
 python3 ~/.codex/skills/oil-tone/scripts/tone_lint.py --self-test
 ```
 
-脚本只能发现已知模式，不能判断事实是否可靠，也不能代替通读和朗读检查。
+合理表达命中 `WARN` 时可以保留。脚本只能发现已知模式，不能判断事实是否可靠，也不能代替通读和朗读检查。
 
 ## 仓库结构
 
