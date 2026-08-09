@@ -36,14 +36,14 @@
 
 ```bash
 python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
-  --repo oil-oil/oil-tone \
+  --repo threetwoa/tta-tone \
   --path skills/oil-tone
 ```
 
 也可以手动安装：
 
 ```bash
-git clone https://github.com/oil-oil/oil-tone.git
+git clone https://github.com/threetwoa/tta-tone.git
 cp -R oil-tone/skills/oil-tone ~/.codex/skills/oil-tone
 ```
 
