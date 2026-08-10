@@ -1,14 +1,14 @@
 <p align="center">
-  <img src="./assets/readme/hero.svg" width="100%" alt="oil-tone：让 AI 文案保持真实、平实、完整和易读">
+  <img src="./assets/readme/hero.svg" width="100%" alt="tta-tone：让 AI 文案保持真实、平实、完整和易读">
 </p>
 
-`oil-tone` 是一份给 AI 使用的个人文风 Skill。它帮助模型在事实边界内完成中文或英文成稿，减少空泛总结、刻意转折、含糊动作和没有信息的文案感。
+`tta-tone` 是一份给 threetwoa 使用的个人文风 Skill。它帮助模型在事实边界内完成中文或英文成稿，减少空泛总结、刻意转折、含糊动作和没有信息的文案感。
 
 它适用于博客、演讲稿、PPT 文案、网站与产品介绍、个人简介、公众号和社交帖子。规则有明确倾向，但不会要求所有内容套用同一种结构。
 
 ## 修改效果
 
-| 常见写法 | oil-tone 的处理 |
+| 常见写法 | tta-tone 的处理 |
 | --- | --- |
 | `主流 AI Coding Agent：先选工作方式` | `主流 AI Coding Agent 的工作方式` |
 | `单文件 HTML 的结构：简单，但不随意` | `单文件 HTML 的基本结构` |
@@ -47,22 +47,22 @@ git clone https://github.com/threetwoa/tta-tone.git
 cp -R oil-tone/skills/oil-tone ~/.codex/skills/oil-tone
 ```
 
-安装后，在下一轮任务中使用 `$oil-tone` 调用。
+安装后，在下一轮任务中使用 `$tta-tone` 调用。
 
 ## 使用
 
 直接把 Skill 和写作任务放在一起：
 
 ```text
-使用 $oil-tone，把这份产品介绍改成可以直接发布的中文成稿。
+使用 $tta-tone，把这份产品介绍改成可以直接发布的中文成稿。
 ```
 
 ```text
-使用 $oil-tone，检查这份 PPT 文案。保留技术细节，删除空泛标题和总结。
+使用 $tta-tone，检查这份 PPT 文案。保留技术细节，删除空泛标题和总结。
 ```
 
 ```text
-使用 $oil-tone，按照我的材料写一篇博客。不要编造个人经历。
+使用 $tta-tone，按照我的材料写一篇博客。不要编造个人经历。
 ```
 
 如果我们准备把它改成自己的文风，可以 fork 仓库，再调整 `skills/oil-tone/SKILL.md` 中的叙述身份、称呼习惯和禁用表达。
