@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Report oil-tone failures and context-sensitive warnings in Chinese copy."""
+"""Report tta-tone failures and context-sensitive warnings in Chinese copy."""
 
 from __future__ import annotations
 
@@ -170,7 +170,7 @@ def self_test() -> int:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Check Chinese copy for known oil-tone issues.")
+    parser = argparse.ArgumentParser(description="Check Chinese copy for known tta-tone issues.")
     parser.add_argument("files", nargs="*", help="UTF-8 files to scan, or - for stdin")
     parser.add_argument("--self-test", action="store_true")
     args = parser.parse_args()
@@ -189,9 +189,9 @@ def main() -> int:
             print(f"WARN  {name}:{line_number}: {line}\n      {fix}")
             warned = True
     if not failed and not warned:
-        print("PASS  no known oil-tone failures")
+        print("PASS  no known tta-tone failures")
     elif not failed:
-        print("PASS  no confirmed oil-tone failures; review warnings")
+        print("PASS  no confirmed tta-tone failures; review warnings")
     return 1 if failed else 0
 
 

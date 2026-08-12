@@ -30,21 +30,21 @@
 
 ## 安装
 
-仓库中的 Skill 位于 `skills/oil-tone/`。
+仓库中的 Skill 位于 `skills/tta-tone/`。
 
 在 Codex 中，可以使用内置安装脚本：
 
 ```bash
 python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
   --repo threetwoa/tta-tone \
-  --path skills/oil-tone
+  --path skills/tta-tone
 ```
 
 也可以手动安装：
 
 ```bash
 git clone https://github.com/threetwoa/tta-tone.git
-cp -R oil-tone/skills/oil-tone ~/.codex/skills/oil-tone
+cp -R tta-tone/skills/tta-tone ~/.codex/skills/tta-tone
 ```
 
 安装后，在下一轮任务中使用 `$tta-tone` 调用。
@@ -65,20 +65,20 @@ cp -R oil-tone/skills/oil-tone ~/.codex/skills/oil-tone
 使用 $tta-tone，按照我的材料写一篇博客。不要编造个人经历。
 ```
 
-如果我们准备把它改成自己的文风，可以 fork 仓库，再调整 `skills/oil-tone/SKILL.md` 中的叙述身份、称呼习惯和禁用表达。
+如果我们准备把它改成自己的文风，可以 fork 仓库，再调整 `skills/tta-tone/SKILL.md` 中的叙述身份、称呼习惯和禁用表达。
 
 ## 脚本检查
 
 Skill 附带一个只使用 Python 标准库的检查脚本。`FAIL` 表示已经确认的问题，会让脚本返回失败；`WARN` 表示需要结合上下文判断的常见 AI 表达，不会单独让脚本失败：
 
 ```bash
-python3 ~/.codex/skills/oil-tone/scripts/tone_lint.py draft.md
+python3 ~/.codex/skills/tta-tone/scripts/tone_lint.py draft.md
 ```
 
 运行脚本自检：
 
 ```bash
-python3 ~/.codex/skills/oil-tone/scripts/tone_lint.py --self-test
+python3 ~/.codex/skills/tta-tone/scripts/tone_lint.py --self-test
 ```
 
 合理表达命中 `WARN` 时可以保留。脚本只能发现已知模式，不能判断事实是否可靠，也不能代替通读和朗读检查。
@@ -86,9 +86,9 @@ python3 ~/.codex/skills/oil-tone/scripts/tone_lint.py --self-test
 ## 仓库结构
 
 ```text
-oil-tone/
+tta-tone/
 ├── assets/readme/hero.svg
-├── skills/oil-tone/
+├── skills/tta-tone/
 │   ├── agents/openai.yaml
 │   ├── scripts/tone_lint.py
 │   └── SKILL.md
@@ -110,3 +110,10 @@ oil-tone/
 ## License
 
 [MIT](./LICENSE)
+
+## 从 oil-* 迁移
+
+1. 删除旧安装：`rm -rf ~/.codex/skills/oil-* ~/.claude/skills/oil-*`
+2. 删除旧配置：`rm -rf ~/.oil-cover ~/.config/oil-motion`（按需备份 API key）
+3. 重新安装：`git clone https://github.com/threetwoa/tta-tone.git ...`
+4. 重新写入 API key 到新配置路径（`~/.config/tta-cover/`、`~/.config/tta-motion/`）
