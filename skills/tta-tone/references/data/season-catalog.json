@@ -1,0 +1,254 @@
+{
+  "version": 1,
+  "source": {
+    "mix": "kaomojikan-emoji.json",
+    "note": "TTA scene map over remaining 絵文字ミックス after user reject rounds. Kaomojikan tags are not the router."
+  },
+  "scenes": {
+    "done": {
+      "label": "办妥",
+      "when": "这一则事情做完，对方下一步是去看、去用、去刷新。",
+      "slugs": [
+        "emoji-0087",
+        "emoji-0088",
+        "emoji-0089",
+        "emoji-0099",
+        "emoji-0100",
+        "emoji-0101",
+        "emoji-0149",
+        "emoji-0150",
+        "emoji-0151",
+        "emoji-0152",
+        "emoji-0153",
+        "emoji-0159",
+        "emoji-0163"
+      ]
+    },
+    "peek": {
+      "label": "点出小坑",
+      "when": "做完或做到一半，还要标未做项、剩余风险、或让对方注意某一处。",
+      "slugs": [
+        "emoji-0070",
+        "emoji-0075",
+        "emoji-0076",
+        "emoji-0077",
+        "emoji-0078",
+        "emoji-0081"
+      ]
+    },
+    "think": {
+      "label": "还在想",
+      "when": "材料不够、判断没落地、或这一则只把问题摊开。",
+      "slugs": [
+        "emoji-0080",
+        "emoji-0196",
+        "emoji-0197",
+        "emoji-0202"
+      ]
+    },
+    "surprise": {
+      "label": "意外",
+      "when": "结果和文档、预期、上一则说法不一致。不是表演惊吓。",
+      "slugs": [
+        "emoji-0098",
+        "emoji-0186",
+        "emoji-0187",
+        "emoji-0188",
+        "emoji-0189",
+        "emoji-0199",
+        "emoji-0203",
+        "emoji-0205"
+      ]
+    },
+    "tea": {
+      "label": "到此为止",
+      "when": "本轮收住、先这样、暂时停。不是庆祝，是放下。",
+      "slugs": [
+        "emoji-0092",
+        "emoji-0105",
+        "emoji-0164",
+        "emoji-0158",
+        "emoji-0227",
+        "emoji-0228",
+        "emoji-0234"
+      ]
+    },
+    "wait": {
+      "label": "交给对方",
+      "when": "明确轮到对方看、标、刷新。这一则不再继续改。",
+      "slugs": [
+        "emoji-0070",
+        "emoji-0081",
+        "emoji-0093",
+        "emoji-0102"
+      ]
+    },
+    "ack": {
+      "label": "记下了",
+      "when": "收下指令或名单，下一则才干活。不要连续两则都 ack。",
+      "slugs": [
+        "emoji-0087",
+        "emoji-0089",
+        "emoji-0103",
+        "emoji-0152"
+      ]
+    },
+    "play": {
+      "label": "轻松收束",
+      "when": "任务本身是挑样子、看陈列、轻松维护。不要用在讲授主课、答问结论、FAIL。",
+      "slugs": [
+        "emoji-0126",
+        "emoji-0127",
+        "emoji-0133",
+        "emoji-0137",
+        "emoji-0140",
+        "emoji-0143"
+      ]
+    }
+  },
+  "widen": {
+    "done": [
+      "ack",
+      "tea"
+    ],
+    "peek": [
+      "think",
+      "wait"
+    ],
+    "think": [
+      "peek",
+      "surprise"
+    ],
+    "surprise": [
+      "think",
+      "peek"
+    ],
+    "tea": [
+      "done",
+      "ack"
+    ],
+    "wait": [
+      "peek",
+      "ack"
+    ],
+    "ack": [
+      "done",
+      "tea"
+    ],
+    "play": [
+      "tea",
+      "wait"
+    ]
+  },
+  "idle": {
+    "rage": [
+      "emoji-0028",
+      "emoji-0123",
+      "emoji-0124"
+    ],
+    "shock": [
+      "emoji-0029",
+      "emoji-0113",
+      "emoji-0114",
+      "emoji-0117",
+      "emoji-0125",
+      "emoji-0190",
+      "emoji-0191",
+      "emoji-0192",
+      "emoji-0193",
+      "emoji-0194",
+      "emoji-0201",
+      "emoji-0204"
+    ],
+    "other": [
+      "emoji-0047",
+      "emoji-0091",
+      "emoji-0096",
+      "emoji-0097",
+      "emoji-0104"
+    ],
+    "overused": [
+      "emoji-0095"
+    ],
+    "throw": [
+      "emoji-0115",
+      "emoji-0116",
+      "emoji-0118",
+      "emoji-0119",
+      "emoji-0120"
+    ],
+    "animal": [
+      "emoji-0128",
+      "emoji-0129",
+      "emoji-0130",
+      "emoji-0131",
+      "emoji-0132",
+      "emoji-0134",
+      "emoji-0135",
+      "emoji-0138",
+      "emoji-0139",
+      "emoji-0141",
+      "emoji-0142",
+      "emoji-0144",
+      "emoji-0145"
+    ],
+    "party": [
+      "emoji-0148",
+      "emoji-0154",
+      "emoji-0157",
+      "emoji-0160",
+      "emoji-0161",
+      "emoji-0162",
+      "emoji-0165"
+    ],
+    "blush": [
+      "emoji-0155",
+      "emoji-0156",
+      "emoji-0166",
+      "emoji-0167",
+      "emoji-0168",
+      "emoji-0171",
+      "emoji-0173",
+      "emoji-0174",
+      "emoji-0175",
+      "emoji-0176",
+      "emoji-0177",
+      "emoji-0178",
+      "emoji-0180",
+      "emoji-0181",
+      "emoji-0183",
+      "emoji-0184",
+      "emoji-0223"
+    ],
+    "cry": [
+      "emoji-0206",
+      "emoji-0208",
+      "emoji-0210",
+      "emoji-0211",
+      "emoji-0212",
+      "emoji-0213",
+      "emoji-0214",
+      "emoji-0215",
+      "emoji-0216"
+    ],
+    "soothe": [
+      "emoji-0219",
+      "emoji-0220",
+      "emoji-0221",
+      "emoji-0222",
+      "emoji-0226"
+    ],
+    "eat": [
+      "emoji-0229"
+    ]
+  },
+  "never_season": [
+    "成稿",
+    "风险",
+    "密钥",
+    "FAIL",
+    "标识清点",
+    "commit",
+    "卡住停手"
+  ]
+}

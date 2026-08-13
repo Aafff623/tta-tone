@@ -1,5 +1,5 @@
 interface:
   display_name: "TTA Tone"
-  short_description: "让 AI 文案保持真实、平实、结构完整、朗读自然并且易读"
+  short_description: "用 threetwoa 的口吻成稿、讲授模块、给出可执行建议"
   brand_color: "#E85D3F"
-  default_prompt: "使用 $tta-tone 把这份草稿改成平实、准确、结构完整并且易读的中文成稿。"
+  default_prompt: "使用 $tta-tone。成稿按原文润色；讲授先查仓库再讲一个模块；答问先给可执行结论。对话收尾用横式 now/before 表；调味按场景从 season.py 抽取，不要手搓。事实来自材料，面向读者用「我们」或「大家」。"
