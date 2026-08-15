@@ -35,10 +35,10 @@
 
 | 库 | 何时打开 | 不要 |
 | --- | --- | --- |
-| `references/voice/` | 成稿、润色经验稿。先 `lexicon.md`，进库看 `INDEX.md` | 把台账项目细节套到无关任务；把全文糊进 Skill |
+| `references/voice/` | 成稿、润色经验稿。只读 `lexicon.md` | 把台账项目细节套到无关任务；把全文糊进 Skill；在本 Skill 里写维护步骤 |
 | `references/kb/` | 讲开发、agent 怎么干活、何时停 | 当成第四张嘴；成稿找开口 |
 
-正式发或用户说「这篇进库」之后：台账只记指针，抽出新词和联想。改完用 `tta-sync-harness` 联接，不要拷 `SKILL.md`。
+词表写入由博客仓 `knowledge-output` 在发布时做。改完用 `tta-sync-harness` 联接，不要拷 `SKILL.md`。
 
 ## 语气（可扩充）
 

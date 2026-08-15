@@ -6,7 +6,7 @@
 
 vault 原文：`D:\OneDrive\Desktop\Notes\threetwoa_ob\Agentic Coding\ZCode：对标国外御三家的国模 ADE 落地产品.md`
 
-不要把全文糊进本文件。对照时打开原文前两节和最后一节即可。惯用词和联想见 [voice/lexicon.md](voice/lexicon.md)；进库规矩见 [voice/INDEX.md](voice/INDEX.md)。
+不要把全文糊进本文件。对照时打开原文前两节和最后一节即可。惯用词和联想见 [voice/lexicon.md](voice/lexicon.md)。
 
 ## 顺序
 

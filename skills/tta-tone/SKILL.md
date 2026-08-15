@@ -122,7 +122,3 @@ description: >
 ```bash
 python3 <tta-tone Skill 目录>/scripts/tone_lint.py <文件路径>
 ```
-
-## 成稿进库
-
-用户说「这篇进库」，或正式发且园主点头之后，按 [references/voice/INDEX.md](references/voice/INDEX.md) 维护：台账只记指针，抽出 3–8 个新词和最多 3 条联想。不要把全文糊进 Skill。草稿、未点头、别人的文章不进。改完用 `tta-sync-harness` 联接，不要拷正文。
