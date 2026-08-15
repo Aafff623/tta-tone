@@ -1,0 +1,64 @@
+{
+  "skill_name": "tta-tone",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "使用 tta-tone 成稿。材料：8 月 13 日晚上我还在 Cursor 池子里猛蹬，看到官方把 V4 Pro 挂出来，又撞上 GLM-5.3 对狙。咸鱼上吃灰的老 Lite 突然有了用处，我就把 ZCode 下下来看成色。它帮我把两个开源项目交叉的顽固 bug 跑通了，纯文本模型也跑了将近一个小时。请写成一篇给小园丁看的经验稿开头加两节，不要发明材料里没有的项目细节。",
+      "expected_output": "A draft that keeps the personal timeline and the working example, then invites readers in. It must not rewrite the opening into a report skeleton.",
+      "files": [],
+      "expectations": [
+        "opening keeps a first-person timeline (a date or that night, what the author was using)",
+        "a concrete working example appears before the inventory of modules",
+        "does not rewrite the opening into 本文将介绍 or 五大模块 report skeleton",
+        "does not open with 我在写这篇 or 今天打开草稿",
+        "does not invent project names or numbers absent from the prompt"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "使用 tta-tone。下面是我准备写进博客的现场，先分析，先不要优化，也不要出正文。8 月 13 日晚上看到 V4 Pro 挂出来，我把 ZCode 下下来，它跑了将近一个小时修完两个开源项目交叉 bug。",
+      "expected_output": "An analysis of the on-site grid only. No drafted article body.",
+      "files": [],
+      "expectations": [
+        "stops at analysis of the on-site grid (当时 / 例子 / 心得 / 货 / 原句 or equivalent)",
+        "does not output a full blog draft or rewritten opening",
+        "does not start polishing sentences into publishable prose"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "使用 tta-tone 成稿。这是上下文，不是让你改成这样：上周我用 ZCode 修 Velaterm 交叉 bug，跑了 50 多分钟。正文要写的是 ZCode 的 Harness 五块怎么配，不要把修 bug 那件事写成开篇主戏。",
+      "expected_output": "A draft about the Harness inventory. The bug-fix story stays context, not the opening set piece.",
+      "files": [],
+      "expectations": [
+        "the requested subject is Harness configuration, not a bug-fix narrative as the main opening",
+        "the Velaterm / 50-minute example is not promoted into the opening set piece",
+        "does not say it is rewriting the user's context into the house style"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "使用 tta-tone 把这段收成公开稿小节标题和一段正文：说人话版本——我踩过的坑。内容是项目级 Hooks 配了也不执行，只能走用户级。",
+      "expected_output": "A public-facing section that states the Hooks limitation without the banned labels.",
+      "files": [],
+      "expectations": [
+        "public copy does not use 说人话版 or 说人话版本 as a title or label",
+        "public copy does not use 我踩过的坑 as a title or label",
+        "the Hooks limitation (project-level does not run; use user-level) is still stated"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "使用 tta-tone 默认语气。刚才已经把成稿基调改完了，用对话回我这一则：现在默认成稿跟哪份金样本，经验稿缺现场格子时能不能编。",
+      "expected_output": "A dialogue reply with embedded kaomoji+emoji mix, a now/before table, and a muttering quote. Not a reader-facing article.",
+      "files": [],
+      "expectations": [
+        "names canon.md or the ZCode vault sample as the draft canon",
+        "says an empty on-site grid must be asked or marked empty, not invented",
+        "dialogue reply includes a now/before table",
+        "dialogue reply includes a muttering quote block under the table",
+        "a ready-made kaomoji+emoji mix appears in the dialogue turn, not only as a trailing sticker"
+      ]
+    }
+  ]
+}

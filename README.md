@@ -9,7 +9,7 @@
   <a href="https://github.com/Aafff623/tta-tone"><img src="https://img.shields.io/badge/github-Aafff623%2Ftta--tone-181717?style=for-the-badge" alt="Aafff623/tta-tone"></a>
 </p>
 
-`tta-tone` 是 threetwoa 的个人文风 Skill。同一套逻辑和人情味，按分支和语气去润色 Agent 回复、文章、演讲或正式答辩。默认开篇必须有主语：先写我们在什么场合、碰到什么问题，再用长短句把原因说够并解开；现成颜文字混排嵌在正文转折处。语气可扩充：没点名走默认，点名走热情或官方。复杂场面按线索抽招式（收窄、先引后判、决策壳），不要口头报层号。页面、动画、配图写完再交接姐妹 Skill。不写营销号召、课表腔和无主句开场。
+`tta-tone` 是 threetwoa 的个人文风 Skill。同一套逻辑和人情味，按分支和语气去润色 Agent 回复、文章、演讲或正式答辩。成稿跟金样本：经验稿先核现场格子，开篇有主语，主语不是「我在写这篇」。对话才嵌现成颜文字混排。语气可扩充：没点名走默认，点名走热情或官方；新人格先长训再登记。复杂场面按线索抽招式（收窄、先引后判、决策壳），不要口头报层号。页面、动画、配图写完再交接姐妹 Skill。不写营销号召、课表腔和无主句开场。
 
 当前公开版本 **0.0.3**。品牌是 threetwoa，源仓在 [Aafff623/tta-tone](https://github.com/Aafff623/tta-tone)。说明书在 [Wiki](https://github.com/Aafff623/tta-tone/wiki)。
 
@@ -17,7 +17,7 @@
 
 | 分支 | 何时用 | 骨架 |
 | --- | --- | --- |
-| 成稿 | 润色、改写、博客、演讲、PPT 文案、网站、简介、答辩稿 | 先写谁在什么场合碰到什么，再解开；官方语气零调味 |
+| 成稿 | 润色、改写、博客、演讲、PPT 文案、网站、简介、答辩稿 | 时间线、干活例子、再请人进来摊货；官方语气零调味 |
 | 讲授 | 分析模块、讲知识、带看代码 | 先把人放进场合，通俗解开，停在下一步 |
 | 答问 | 怎么办、要不要、下一步怎么选 | 先接你卡在哪，再给可执行结论 |
 
@@ -31,11 +31,20 @@
 
 默认停在 Markdown。用户点名分享页、翻页、动画、插画或封面时，再交接 `tta-html` / `tta-ppt` / `tta-motion` / `tta-visual` / `tta-cover`。专业架构走可编辑结构图，不要用生图模型冒充。
 
+## 两套外挂
+
+| 库 | 何时打开 | 不要 |
+| --- | --- | --- |
+| `references/voice/` | 成稿、润色经验稿。先 `lexicon.md`，进库看 `INDEX.md` | 把台账项目细节套到无关任务；把全文糊进 Skill |
+| `references/kb/` | 讲开发、agent 怎么干活、何时停 | 当成第四张嘴；成稿找开口 |
+
+正式发或用户说「这篇进库」之后：台账只记指针，抽出新词和联想。改完用 `tta-sync-harness` 联接，不要拷 `SKILL.md`。
+
 ## 语气（可扩充）
 
 | 语气 | 何时用 |
 | --- | --- |
-| 默认 | 没点名。先写我们在什么场合、碰到什么问题，再解开；长短句错落；混排嵌在正文转折 |
+| 默认 | 没点名。成稿跟金样本；讲授 / 答问先写谁在做什么；长短句错落；混排只嵌对话转折 |
 | 热情 | 用户说热情、活泼、旧风格。先应一声再接问题 |
 | 官方 | 正式汇报、答辩、公文。事实起笔，零调味 |
 
@@ -161,9 +170,16 @@ tta-tone/
 ├── skills/tta-tone/
 │   ├── agents/openai.yaml
 │   ├── references/identity.md
+│   ├── references/canon.md
 │   ├── references/layers.md
 │   ├── references/modes.md
 │   ├── references/seasoning.md
+│   ├── references/voice/
+│   ├── references/kb/INDEX.md
+│   ├── references/kb/sources.md
+│   ├── references/kb/craft/
+│   ├── references/kb/explore/
+│   ├── evals/evals.json
 │   ├── references/data/kaomojikan-emoji.json
 │   ├── references/data/season-catalog.json
 │   ├── scripts/season.py
