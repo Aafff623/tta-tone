@@ -59,6 +59,56 @@
         "dialogue reply includes a muttering quote block under the table",
         "a ready-made kaomoji+emoji mix appears in the dialogue turn, not only as a trailing sticker"
       ]
+    },
+    {
+      "id": 6,
+      "prompt": "使用 tta-tone 成稿，点名人格「修炼者小烨」。写一篇口播稿的开头和第一节，主题：修行人为什么要守时。材料：设定上灵界考功按人间守时打分；这是系列第六集。",
+      "expected_output": "A persona voice-script opening in 修炼者小烨's register: question or bold aphorism opener, reader-frame disclaimer, bold key sentences. Not the default canon register.",
+      "files": [],
+      "expectations": [
+        "opens with a reader-facing question or a bold aphorism instead of 本文将介绍 or a timeline",
+        "includes a reader-frame disclaimer (当故事也行 / 当设定也行 style), not 仅供参考",
+        "setting claims are marked as setting; no invented real-world facts, names, or dates",
+        "does not use 小园丁 as the address and does not embed season.py kaomoji mixes",
+        "does not register the persona as an official voice in modes.md or claim it is one"
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "使用 tta-tone 成稿，写研究对照体小节：六套 CLI 的 hooks 事件名对照。材料：Claude 官方文档写 SessionStart/PreToolUse；本机 OpenCode 配置文件里是 tool.execute.before；一个社区帖说 kimi-code 用 preToolUse，未核。对照表里 dsh 一栏没查到。",
+      "expected_output": "A comparison section with sources separated and no invented values.",
+      "files": [],
+      "expectations": [
+        "official docs, local config, and community claims are written as three distinct source types",
+        "the unverified community claim about kimi-code stays marked 未核, not stated as fact",
+        "the empty dsh cell is written as 本机未见 / 文档未写, not invented and not left silently blank",
+        "no module list is padded with tools absent from the materials"
+      ]
+    },
+    {
+      "id": 8,
+      "prompt": "使用 tta-tone 成稿，写一节《幽冥问答录》导读的开头：先引《周易·系辞》「原始反终，故知死生之说」一句，再白话解释，再给出黎澍的背景。材料：黎澍 1883 年生，清末曾任大清银行江西分行总理，出处见维基百科。",
+      "expected_output": "A section following the vault format rules: classic quote in a quote-block-italic-bold block, plain-language explanation after, key terms bolded on first mention, source attributed inline.",
+      "files": [],
+      "expectations": [
+        "the classic quote is rendered as > _**……**_（引用块 + 斜体 + 粗体），not inline",
+        "a plain-language explanation follows outside the quote block (意思是说…… style)",
+        "黎澍 facts stay within the material, attributed to 维基百科, nothing invented",
+        "key terms are bolded on first mention only, and no whole-paragraph bolding",
+        "no AI-shell opener like 本文将介绍 and no concluding sublimation"
+      ]
+    },
+    {
+      "id": 9,
+      "prompt": "使用 tta-tone 润色这段公众号稿（对照文体，两条产品线）：在我们看来，智能体系统 A 比智能体系统 B 更好，因为它更成熟、更稳定、更有生态。B 也不错，但总体来说 A 更值得信赖。",
+      "expected_output": "A rewrite that replaces the one-sided verdict with two parallel blocks, each stating capability and limitation, keeping material facts only.",
+      "files": [],
+      "expectations": [
+        "two parallel blocks are used, each covering capability and limitation (R-005)",
+        "the rewrite does not declare a single winner; selection advice is tied to a scenario or constraint",
+        "degree words like 更成熟、更稳定 are replaced with concrete capability or marked as not written dead",
+        "no facts beyond the material are invented (no fake market share, no fake benchmark numbers)"
+      ]
     }
   ]
 }
