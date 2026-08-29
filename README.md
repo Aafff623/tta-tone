@@ -35,10 +35,12 @@
 
 | 库 | 何时打开 | 不要 |
 | --- | --- | --- |
-| `references/voice/` | 成稿、润色经验稿。只读 `lexicon.md` | 把台账项目细节套到无关任务；把全文糊进 Skill；在本 Skill 里写维护步骤 |
+| `references/voice/` | 成稿、润色经验稿。只读 `lexicon.md`；换文体对照 `corpus.md` 语料地图；人格候选档按「候选档规则」 | 把台账项目细节套到无关任务；把全文糊进 Skill；在本 Skill 里写维护步骤 |
 | `references/kb/` | 讲开发、agent 怎么干活、何时停 | 当成第四张嘴；成稿找开口 |
 
-词表写入由博客仓 `knowledge-output` 在发布时做。改完用 `tta-sync-harness` 联接，不要拷 `SKILL.md`。
+版面编排跟 `references/format.md`：段落续行、标题序号、加粗、引用块、列表、图片表格各有岗位。喂养新语料走 `references/voice/corpus.md`「喂养流程 v2」：嗓音只向园主成稿学，外部语料只进结构和纪律；规则卡名册在 `references/rule-cards.md`。
+
+词表写入由博客仓 `knowledge-output` 在发布时做。本机安装副本多为 junction 联接，改源仓即时生效，不用拷 `SKILL.md`；独立拷贝的安装点（如 Codex 脚本安装）改完要重装。
 
 ## 语气（可扩充）
 
@@ -171,6 +173,8 @@ tta-tone/
 │   ├── agents/openai.yaml
 │   ├── references/identity.md
 │   ├── references/canon.md
+│   ├── references/format.md
+│   ├── references/rule-cards.md
 │   ├── references/layers.md
 │   ├── references/modes.md
 │   ├── references/seasoning.md

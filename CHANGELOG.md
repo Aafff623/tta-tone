@@ -2,12 +2,44 @@
 
 ## Unreleased
 
-### 文档
+## 发版检查单
 
-- `references/voice/` 本 Skill 只读。写入改由博客仓 `knowledge-output` 在发布时做，步骤不写进本 Skill。
+决定 bump VERSION 时执行，不决定发版时不挂：
 
-### 新功能
+1. `python skills/tta-tone/scripts/tone_lint.py --self-test` PASS。
+2. evals.json 全量用例与本轮新规则一一对应，新增规则都有用例。
+3. CHANGELOG 的 Unreleased 块收拢成版本号节，标题带日期。
+4. VERSION 文件与 README 徽章同步。
+5. README「仓库结构」树与 `skills/tta-tone/` 实际文件一致。
+6. 源仓 push 后，junction 安装点即时生效；独立拷贝的安装点（如 Codex 脚本安装）重装一次。
 
+### 新功能（第四轮 · 喂养流水线 v2）
+
+- 新增 `references/rule-cards.md` 规则卡名册：R-001 起九张现役卡 + 三张观察卡，每卡带类型 / 规律 / 证据 / 落点 / 来源；入库门槛证据 ≥2 篇进骨架层，单例只落参照层
+- `voice/corpus.md` 新增「喂养流程 v2」七步：语料体检（正例 / 反例 / 混合）→ 投喂 → 提炼（证据数量字段）→ 分级审批（语气必审、低风险批量放行）→ 固化（查重 + 冲突声明 + 编号）→ 全量回归（回采集：园主改回的句子优先转 lint / eval）→ 修剪（未命中规则退役）
+- `identity.md` 永远做第 6 条：嗓音只向园主成稿学；外部语料只进结构和纪律
+- `SKILL.md` 头部接线喂养流程与规则卡名册
+
+### 新功能（第三轮 · 版面编排）
+
+- 新增 `references/format.md`：从 vault 已发布稿抽取的排版规律——段内续行双写法（行尾双空格 / tab 缩进）、中文数字管章 + 阿拉伯数字管条、加粗四岗位（术语定义 / 承重句 / 列表领起 / 更新标签）、引用块四用法（引文层 `> _**…**_` / 金句 `> **…**` / 裸引语 / 实测更新块）、`1)` 紧凑枚举 vs `1.` 步骤 vs `- ` 并列的分工、tab 补充行、图片锚位与表格领起
+- `SKILL.md` 格式节、`canon.md` 顺序区、`modes.md`「怎么排」三处接线 format.md
+- evals 加第八例：引文层 + 白话解释 + 首次加粗的版面用例
+
+### 新功能（第二轮 · 融合外部 humanizer 设计）
+
+- `canon.md` 新增「理性化陷阱」对抗表：模型想保留 AI 痕迹时的七个台阶（形式借鉴 shyuan/writing-humanizer，条目按金样本实况写）
+- 人味节新增「表达意外」招式：材料里哪一步跟预想不一样照实写，不靠编（借鉴 humanizer-zh-academic 无魂对策）
+- `voice/corpus.md` 候选档新增「机会性点名」协议：长篇成稿最多问一次要不要套人格档，拒绝不再追问，人格档案优先于成稿模具但事实边界不豁免（借鉴 ai-zixun/humanizer-zh voice adoption）
+- 优先级 2 新增 Repo Override：当前项目有自己的文风样本或约定时先学项目，再套通用规则
+- `tone_lint.py` 结构检查新增加粗密度（正文加粗 >5 处 WARN，人格稿可放宽）；self-test 扩到三个结构用例
+
+### 新功能（第一轮 · 语料接入）
+
+- 语料地图 `references/voice/corpus.md`：vault 全库文体指针（研究对照体、人格口播、世界观稿、文史整理体、素材卡、面试路线图）+ 人格稿八条公共招式 + 候选档规则；人格仍是候选档，未长训不进 modes 语气表
+- 成稿子场合壳加三行：研究对照体（三源分开、文档打架单列、空格写「本机未见」）、人格专栏 / 口播稿（设问开场、读者框定免责、签名收尾）、长文协作壳（观点卡 → 大纲 → 分章，确认闸 opt-in）
+- `tone_lint.py` 增加全文级结构检查：连续单句段落、设问密度（口播稿可放宽）；WARN 增加名词化动词；FAIL 黑话补 破局 / 组合拳 / 全链路
+- evals 增加两例：人格口播稿（候选档壳）与研究对照体（三源纪律）
 - 成稿改跟金样本：经验稿先核现场格子；顺序是时间线 → 干活例子 → 请人进来摊货。`references/canon.md`
 - 成稿外挂词表 `references/voice/`：成稿只读 `lexicon.md`
 - 外挂知识库 `references/kb/`：线索命中再抽 1–2 篇短卡，不覆盖开口，不报编号。这是工程短卡，不是成稿词表
@@ -16,6 +48,9 @@
 
 ### 文档
 
+- `SKILL.md`：description 路由补研究对照与人格稿；步骤 2 接线 `corpus.md`；用词加语言边界硬线（名词化、排比造气势、连续单句段）
+- `canon.md` 指针区指向 `corpus.md`；`voice/ledger.md` 补四条语料指针
+- `references/voice/` 本 Skill 只读。写入改由博客仓 `knowledge-output` 在发布时做，步骤不写进本 Skill。
 - 答问：不知道用哪份开发 Skill 时先接处境，再调用 `ask-matt`
 - `SKILL.md` 步骤 2：讲开发 / agent / 何时停时打开 `kb/INDEX.md`
 - `layers.md`：开发流程走知识库，不是新招式轴；预写反驳先复述对方中心论点
