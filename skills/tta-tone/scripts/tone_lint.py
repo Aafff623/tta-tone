@@ -13,7 +13,7 @@ from pathlib import Path
 Rule = tuple[re.Pattern[str], str]
 
 RULES: tuple[Rule, ...] = (
-    (re.compile(r"(?:赋能|撬动|抓手|闭环|沉淀价值|价值落地)"), "删除宣传黑话，直接说明具体作用。"),
+    (re.compile(r"(?:赋能|撬动|抓手|闭环|破局|组合拳|全链路|沉淀价值|价值落地)"), "删除宣传黑话，直接说明具体作用。"),
     (re.compile(r"原因很简单[：:，,。]?"), "删除模板化领起语，直接说明具体原因。"),
     (re.compile(r"(?:真正重要的是|真正的关键是|这不仅仅?是|从更大的角度看)"), "删除没有增加信息的总结或升华表达。"),
     (re.compile(r"任务.{0,12}停在[“\"]?代码已经写出来"), "直接说明 Codex 写完代码后继续执行哪些检查。"),
@@ -49,6 +49,7 @@ WARNING_RULES: tuple[Rule, ...] = (
     (re.compile(r"(?i)(?:You've got this|Keep going)"), "删除没有新信息的英文加油收尾。"),
     (re.compile(r"(?i)(?:Bookmark this|Feel free to Star)"), "删除英文发布腔号召或 Star 号召。"),
     (re.compile(r"(?:可能|或许|也许|在一定程度上|在某种程度上).{0,8}(?:可能|或许|也许|在一定程度上|在某种程度上)"), "合并重复限定，保留一个符合事实状态的说法。"),
+    (re.compile(r"进行了.{0,8}(?:优化|分析|调整|提升)|实现了.{0,8}(?:优化|提升|增长)"), "名词化动词改回具体动作：谁做了什么，结果是什么。"),
 )
 
 
@@ -98,6 +99,49 @@ def find_warnings(text: str) -> list[tuple[int, str, str]]:
     return find_matches(text, WARNING_RULES)
 
 
+def find_structural(text: str) -> list[tuple[int, str, str]]:
+    matches: list[tuple[int, str, str]] = []
+    entries: list[tuple[int, str]] = []
+    in_fence = False
+    for number, raw in enumerate(text.splitlines(), start=1):
+        stripped = raw.strip()
+        if stripped.startswith("```"):
+            in_fence = not in_fence
+            continue
+        if in_fence or not stripped:
+            continue
+        if re.match(r"(?:[-*+]|\d+[.)])\s", stripped) or stripped.startswith(("|", ">", "#", "!")):
+            continue
+        content = re.sub(r"`[^`]*`", " ", stripped)
+        content = re.sub(r"\s+", " ", html.unescape(content)).strip()
+        if content:
+            entries.append((number, content))
+    run: list[tuple[int, str]] = []
+    for number, line in entries:
+        if len(line) <= 12:
+            run.append((number, line))
+            continue
+        if len(run) >= 3:
+            matches.append((run[0][0], run[0][1], "连续单句段落是在用短句造气势；把判断合并回有主语的段落。"))
+        run = []
+    if len(run) >= 3:
+        matches.append((run[0][0], run[0][1], "连续单句段落是在用短句造气势；把判断合并回有主语的段落。"))
+    question_marks = sum(line.count("？") + line.count("?") for _, line in entries)
+    if question_marks > 10:
+        first = entries[0][0] if entries else 1
+        matches.append((first, "全篇设问偏多", f"全文出现 {question_marks} 个问号；确认每个问句承担过渡作用，口播稿可放宽。"))
+    bold_count = 0
+    bold_line = 1
+    for number, line in entries:
+        count = len(re.findall(r"\*\*[^*\n]{1,60}\*\*", line))
+        if count and not bold_count:
+            bold_line = number
+        bold_count += count
+    if bold_count > 5:
+        matches.append((bold_line, "加粗偏多", f"全文加粗 {bold_count} 处；加粗要真承重，超过五处多半在拿加粗当拐棍（人格稿金句可放宽）。"))
+    return matches
+
+
 def self_test() -> int:
     bad = "\n".join((
         "这套方案可以赋能开发团队。",
@@ -110,6 +154,7 @@ def self_test() -> int:
         "团队齐心协力完成了上线。",
         "下面是说人话版本。",
         "第三节：我踩过的坑。",
+        "用组合拳破局，打通全链路。",
     ))
     good = "\n".join((
         "模型必须先遵循事实准确这项要求。",
@@ -154,6 +199,7 @@ def self_test() -> int:
         "据了解，接口将在下周关闭。",
         "机遇与挑战并存。",
         "这不是固定流程，而是一套会根据情况变化的方法。",
+        "我们对接口进行了优化，实现了提升。",
     ))
     warning_good = "\n".join((
         "2025 年 3 月接口升级后，旧版客户端无法继续登录。",
@@ -161,8 +207,36 @@ def self_test() -> int:
         "产品支持批量处理和离线模式。",
         "这项政策可能影响结果。",
     ))
+    structural_bad = "\n".join((
+        "这不是运气。",
+        "这是选择。",
+        "这也是纪律。",
+        "那为什么工具越强，翻车的方式越花？",
+        "为什么名册越肥，真正被点名的越少？",
+        "为什么配置越全，缝隙反而越显眼？",
+        "为什么补丁越打，问题换个地方又回来？",
+        "为什么文档越写越厚，答案越来越难找？",
+        "为什么演示很顺，落地就散架？",
+        "为什么团队越大，上线反而越慢？",
+        "为什么评审越多，低级错误越漏？",
+        "为什么指标越全，方向感越差？",
+        "为什么教程越写越长，能跟着走完的越少？",
+        "为什么盘点越做越勤，判断反而越少？",
+        "**这一句是全文第一处加粗的金句。**",
+        "**这一句是全文第二处加粗的金句。**",
+        "**这一句是全文第三处加粗的金句。**",
+        "**这一句是全文第四处加粗的金句。**",
+        "**这一句是全文第五处加粗的金句。**",
+        "**这一句是全文第六处加粗的金句。**",
+    ))
+    structural_good = "\n".join((
+        "那天晚上我还在旧池子里猛蹬，官方悄摸摸把正式版挂了出来。",
+        "它帮我把两个开源项目交叉的顽固 bug 跑通了，纯文本模型跑了将近一个小时。",
+        "那么各位小园丁，下面把我摸到的配置摊开揉碎讲一遍。",
+    ))
     failures = find_failures(bad)
     warnings = find_warnings(warning_bad)
+    structural_failures = find_structural(structural_bad)
     failure_lines = {line_number for line_number, _, _ in failures}
     warning_lines = {line_number for line_number, _, _ in warnings}
     if (
@@ -170,12 +244,16 @@ def self_test() -> int:
         or find_failures(good)
         or warning_lines != set(range(1, len(warning_bad.splitlines()) + 1))
         or find_warnings(warning_good)
+        or len(structural_failures) != 3
+        or find_structural(structural_good)
     ):
         print("FAIL  tone lint self-test")
         for failure in failures:
             print(f"      {failure}")
         for warning in warnings:
             print(f"      {warning}")
+        for structural in structural_failures:
+            print(f"      {structural}")
         return 1
     print("PASS  tone lint self-test")
     return 0
@@ -198,6 +276,9 @@ def main() -> int:
             print(f"FAIL  {name}:{line_number}: {line}\n      {fix}")
             failed = True
         for line_number, line, fix in find_warnings(content):
+            print(f"WARN  {name}:{line_number}: {line}\n      {fix}")
+            warned = True
+        for line_number, line, fix in find_structural(content):
             print(f"WARN  {name}:{line_number}: {line}\n      {fix}")
             warned = True
     if not failed and not warned:
