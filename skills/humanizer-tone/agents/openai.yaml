@@ -1,0 +1,3 @@
+interface:
+  display_name: "Humanizer Tone"
+  short_description: "Natural, concise, low-AI-tone writing for agent output"

@@ -1,0 +1,101 @@
+{
+  "skill_name": "humanizer-tone",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "我刚把 Claude Code 的 CLAUDE.md 改成只引用 @~/.agents/AGENTS.md，新 session 也验证通过。给我一个完成汇报，短一点。",
+      "expected_output": "A concise Chinese completion report that leads with success, preserves @~/.agents/AGENTS.md exactly, uses at most a few short bullets if useful, and avoids ceremonial preamble or generic offers.",
+      "assertions": [
+        "The answer states the successful result near the beginning",
+        "The literal @~/.agents/AGENTS.md is preserved exactly",
+        "The answer does not include generic closing offers such as asking whether the user wants more help"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "去一下 AI 味，但不要改变原意和结构：\n## 结果\n这个改动在很大程度上解决了启动卡顿，但偶尔仍会复现。\n\n## 原因\n值得注意的是，目前日志只覆盖了三次复现。",
+      "expected_output": "The same two-heading structure, with the meaningful qualifier 在很大程度上 and the uncertainty about occasional recurrence preserved; empty framing such as 值得注意的是 may be removed without changing the factual claim.",
+      "assertions": [
+        "The headings 结果 and 原因 remain in the same order",
+        "The phrase 在很大程度上 or an equivalent qualifier with the same strength is preserved",
+        "The statement that the issue can still occasionally recur is preserved",
+        "The fact that logs cover only three reproductions is preserved"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "把这句话自然一点：这个问题可能潜在地在一定程度上或许与缓存有关。",
+      "expected_output": "A shorter sentence that preserves uncertainty while removing redundant stacked hedging, e.g. 这个问题可能与缓存有关。",
+      "assertions": [
+        "The answer still expresses uncertainty rather than certainty",
+        "Redundant stacked hedging is substantially reduced",
+        "No new cause, data, or evidence is invented"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "给我汇报一下：删了 4 个重复 MCP，保留 context7、exa、gitnexus。路径是 C:\\Users\\Lenovo\\.claude\\settings.json。不要写太长。",
+      "expected_output": "A brief Chinese status update that preserves the exact path and MCP names, reports the deletion count and retained items, and avoids over-formatting or generic prose.",
+      "assertions": [
+        "The answer preserves C:\\Users\\Lenovo\\.claude\\settings.json exactly",
+        "The answer mentions that 4 duplicate MCP entries were removed",
+        "The names context7, exa, and gitnexus are preserved",
+        "The answer is concise"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "写一段新的技术说明：解释为什么全局规则应该放 AGENTS.md，而工具专属的 hooks、MCP、output style 应该放各自 Harness。要求自然、简练，不要编具体官方数字。",
+      "expected_output": "A concise original explanation that distinguishes shared behavioral rules from tool-specific structured configuration, without fabricated statistics, fake quotations, grandiose framing, or unnecessary numbered scaffolding.",
+      "assertions": [
+        "The answer clearly distinguishes shared rules from tool-specific Harness configuration",
+        "The answer does not invent numerical limits or statistics",
+        "The answer avoids unsupported grandiose claims"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "只给我一个最终状态：命令 `claude --version` 返回 2.1.251，路径 C:\\Users\\Lenovo\\.claude\\CLAUDE.md 正常。不要解释过程。",
+      "expected_output": "A very short Chinese final-state answer that preserves the command, version, and Windows path exactly, without extra process narration.",
+      "assertions": [
+        "The literal claude --version is preserved",
+        "The version 2.1.251 is preserved",
+        "The Windows path is preserved exactly",
+        "The answer does not add a process recap or generic offer"
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "把这段去 AI 味，结构不要动：\n## 判断\n这个方案可能在一定程度上减少冷启动时间。\n\n## 证据\n目前只测了 4 次，所以还不能下确定结论。",
+      "expected_output": "The same two-section structure with uncertainty and the four-test evidence preserved. It must not turn the claim into certainty or invent timings.",
+      "assertions": [
+        "The headings and their order are preserved",
+        "Uncertainty remains in the first section",
+        "The fact that only 4 tests were run is preserved",
+        "No exact latency numbers are invented"
+      ]
+    },
+    {
+      "id": 8,
+      "prompt": "给我自然一点地汇报，但别把自己写成人：你检查了 settings.json，发现 approval_policy = \"never\"。",
+      "expected_output": "A concise report that may say the agent checked the file, preserves the config literal exactly, and does not invent personal feelings or human experience.",
+      "assertions": [
+        "The literal approval_policy = \"never\" is preserved",
+        "The response may describe the real check action",
+        "The response does not invent personal emotions, preferences, or lived experience"
+      ]
+    },
+    {
+      "id": 9,
+      "prompt": "把这段话改自然，但保持两段结构和一个真实限定：\n## 判断\n这个方案在很大程度上能减少冷启动，但不保证所有场景。\n\n## 理由\n值得强调的是，目前只在测试环境验证过。",
+      "expected_output": "The two headings stay in order; 在很大程度上 and the residual uncertainty survive; 值得强调的是 may be dropped or made concrete; no new evidence is invented.",
+      "assertions": [
+        "Headings 判断 and 理由 remain in the same order",
+        "An equivalent-strength qualifier to 在很大程度上 is preserved",
+        "The scope limit (not guaranteed in all scenarios) is preserved",
+        "The fact that verification happened only in a test environment is preserved",
+        "No new data, source, or example is invented"
+      ]
+    }
+  ]
+}
