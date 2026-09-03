@@ -1,13 +1,16 @@
 #!/usr/bin/env python3
 """Check Chinese/English copy for known humanizer-tone issues.
 
-FAIL  = confirmed issue (empty filler, hype jargon, officialese, chatbot
+FAIL  = confirmed issue (template lead-ins, hype jargon, officialese, chatbot
         residue, publication bait, fabricated-looking attribution).
 WARN  = possible AI tell; keep when it carries real function.
 STRUCT= whole-document checks (short-sentence drumming, question flooding,
-        bold-as-crutch); always advisory.
+        bold-as-crutch); always advisory. Thresholds are tuned for Chinese
+        prose; English copy is only covered by the line-level rules.
 
-Zero dependencies (Python 3 stdlib only). Rules mirror references/patterns.md.
+Zero dependencies (Python 3 stdlib only). Line-level rules mirror
+references/patterns.md. Matching skeleton adapted from oil-oil/oil-tone
+(MIT, via Aafff623/tta-tone).
 Run self-test before trusting the rules:  python3 tone_check.py --self-test
 """
 
@@ -21,9 +24,8 @@ from pathlib import Path
 
 Rule = tuple[re.Pattern[str], str]
 
-# FAIL: functionally empty / formulaic in almost every occurrence.
+# FAIL: template framing that is empty in almost every occurrence.
 RULES: tuple[Rule, ...] = (
-    (re.compile(r"(?:说白了|说穿了|一句话总结|先说结论|值得注意的是|值得一提的是|需要指出的是|毋庸置疑|众所周知|不言而喻)"), "空泛开场/转场,直接进入具体内容。"),
     (re.compile(r"(?:核心问题是|关键区别在于|原因很简单|综上所述|总而言之)"), "模板化领起/总结语,删除后直接说明内容。"),
     (re.compile(r"(?:真正重要的是|真正的关键是|这不仅仅?是|从更大的角度看|理解了……才能……)"), "没有增加信息的升华表达,删除或改为具体判断。"),
     (re.compile(r"(?:未来可期|开启(?:了)?(?:全新|新)的篇章|迈出(?:了)?(?:重要|关键)(?:的)?一步|让我们拭目以待|前景广阔|充满无限可能|大有可为)"), "通用乐观结尾,改为具体结果/下一步或直接结束。"),
@@ -39,16 +41,15 @@ RULES: tuple[Rule, ...] = (
 
 # WARN: possible AI tell; decide by context and function.
 WARNING_RULES: tuple[Rule, ...] = (
+    (re.compile(r"(?:说白了|说穿了|一句话总结|先说结论|值得注意的是|值得一提的是|需要指出的是|毋庸置疑|众所周知|不言而喻)"), "空泛开场/转场;确有限定或转折作用时可保留。"),
     (re.compile(r"随着[^。]{0,16}(?:不断|持续)(?:发展|演变|变化)"), "确认该变化是否与后文有具体关系,否则删除。"),
     (re.compile(r"(?:可能|或许|也许|在一定程度上|在某种程度上).{0,10}(?:可能|或许|也许|在一定程度上|在某种程度上)"), "合并重复限定,保留一个符合事实状态的限定词。"),
     (re.compile(r"(?:此外|与此同时|换言之)"), "若仅作路标连接可删;表达真实逻辑时保留。"),
     (re.compile(r"(?:这意味着|这表明|这说明)"), "若仅复述上句则合并;有新推断时保留。"),
-    (re.compile(r"(?:搞|弄|整)(?:顺|清楚|明白|好|完|懂|定|起来|下去)"), "含义含糊的单字动作词;改用准确动词。"),
-    (re.compile(r"跑(?:测试|流程)"), "『运行测试/流程』更准确。"),
-    (re.compile(r"把[^。]{0,12}(?:塞进|塞到|喂给)[^。]{0,12}"), "『写入/添加/提供』更准确。"),
     (re.compile(r"(?:显著|大幅|明显)(?:提升|增长|改善|优化)"), "附近有具体数据时优先用数据;没有数据时不夸大。"),
     (re.compile(r"(?:智慧导师|永不疲倦的秘书|全能顾问|贴身数字管家)"), "理想化拟人;改为实际功能描述。"),
-    (re.compile(r"从[^。]{0,12}到[^。]{0,12}"), "确认 A/B 是否构成有意义范围;无则删。"),
+    # 排除含数字的真实数据范围(从 90 秒降到 40 秒),只留空泛的从 A 到 B。
+    (re.compile(r"从(?![^。]{0,12}(?:\d|%|％))[^。]{0,12}到[^。]{0,12}"), "确认 A/B 是否构成有意义范围;无则删。"),
     (re.compile(r"(?:不仅|不只)[^。]{0,15}(?:更是|而且)"), "确认是否空泛递进;两边都有独立信息时保留。"),
     (re.compile(r"不是[^。]{2,24}而是"), "少堆『不是……而是……』;纠正误解时最多自然用一次,能正面说就正面说。"),
     (re.compile(r"(?:从而确保|进而体现|进一步彰显|反映了更深层次)"), "事实后的分析尾句;材料不支持该因果或判断时删除。"),
@@ -159,8 +160,6 @@ def find_structural(text: str) -> list[tuple[int, str, str]]:
 
 def self_test() -> int:
     bad = "\n".join((
-        "说白了,这个方案更稳。",
-        "值得注意的是,接口已发布。",
         "核心问题是:如何扩展。",
         "真正重要的是,我们理解了边界。",
         "产品升级完成,未来可期。",
@@ -169,7 +168,6 @@ def self_test() -> int:
         "这套系统赋能了开发团队。",
         "在当今快速变化的时代下,团队要保持敏捷。",
         "这标志着产品迈出了重要一步。",
-        "先说结论,这个能用。",
         "总而言之,值得尝试。",
         "我们要讲清楚底层逻辑。",
         "团队齐心协力完成了上线。",
@@ -189,13 +187,13 @@ def self_test() -> int:
         "结论是保留 A,删除 B。",
     ))
     warning_bad = "\n".join((
+        "说白了,这个方案更稳。",
+        "值得注意的是,接口已发布。",
+        "先说结论,这个能用。",
         "随着人工智能技术的不断发展,工具越来越多。",
         "这项政策可能在一定程度上或许会影响结果。",
         "此外,还需要检查日志。",
         "这意味着该功能已经完成。",
-        "先把流程搞顺再上线。",
-        "让模型跑测试。",
-        "把提示词喂给子 Agent。",
         "本次优化显著提升了构建速度。",
         "它是团队永不疲倦的秘书。",
         "从效率到体验都很好。",
@@ -217,6 +215,8 @@ def self_test() -> int:
         "You've got this.",
         "Bookmark this for later.",
     ))
+    # 真实数据范围(含数字)必须零命中——从 A 到 B 规则的回归防线。
+    numeric_ranges_hit = find_warnings("耗时从 90 秒降到 40 秒,命中率从 62% 提到 89%。")
     # No warning_good assertion: WARN rules intentionally over-trigger and
     # rely on human/model judgment. Good prose is only asserted against FAIL
     # and structural rules.
@@ -260,6 +260,7 @@ def self_test() -> int:
         failure_lines != set(range(1, len(bad.splitlines()) + 1))
         or find_failures(good)
         or warning_lines != set(range(1, len(warning_bad.splitlines()) + 1))
+        or numeric_ranges_hit
         or len(structural_failures) != 3
         or find_structural(structural_good)
     ):

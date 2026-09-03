@@ -32,14 +32,10 @@ Skill 本名 `humanizer-tone`,源仓托管在本仓库(`tta-tone`)的 `skills/hu
 git clone https://github.com/Aafff623/tta-tone.git
 ```
 
-把 `skills/humanizer-tone/` 拷进对应 harness 的 skills 目录:
+把 `skills/humanizer-tone/` 拷进你的 harness 的 skills 目录(已知兼容 `~/.agents/skills/`、`~/.claude/skills/`、`~/.cursor/skills/`,其他支持 Anthropic skill 格式的目录同样适用):
 
 ```bash
-# 共享层(.zcode 经 junction 自动可见)
 cp -R tta-tone/skills/humanizer-tone ~/.agents/skills/
-# 独立副本
-cp -R tta-tone/skills/humanizer-tone ~/.claude/skills/
-cp -R tta-tone/skills/humanizer-tone ~/.cursor/skills/
 ```
 
 安装后,在下一轮任务中按 harness 的方式调用(如 `$humanizer-tone`)。

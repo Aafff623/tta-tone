@@ -30,6 +30,8 @@ Treat the invariants above as ordered, not equal. Resolve a conflict in this ord
 3. Preserve meaning and a natural, readable structure before trimming words.
 4. Only then adjust rhythm, headings, and formatting.
 
+Front-loading the useful result is the default for replies; reader-facing long-form prose may open with context instead.
+
 Nothing in this Skill overrides an instruction the user gives in the current turn.
 
 ## Choose the least-permissive mode that fits

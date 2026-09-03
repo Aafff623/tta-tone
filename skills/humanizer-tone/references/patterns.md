@@ -1,6 +1,6 @@
 # Humanizer Tone Pattern Catalog
 
-This catalog deeply merges the two source approaches into one hierarchy. It keeps the empirical, minimal-edit discipline of `lieflat-less-ai-tone` and the broader coverage of `humanizer-zh`, while removing their contradictions.
+This catalog merges its source approaches into one hierarchy: the empirical, minimal-edit discipline of `lieflat-less-ai-tone`, the broader coverage of `humanizer-zh`, plus drafting-oriented patterns borrowed from oil-tone and tta-tone (sections 7–8).
 
 ## 1. Strong patterns
 
@@ -180,7 +180,7 @@ Do not rewrite solely because of:
 - **Formatting:** do not globally ban bold, lists, or emoji; remove only mechanical or distracting use.
 - **Structure:** preserve existing structure in editing; allow useful restructuring in new drafts.
 
-Do not run the two source rule sets independently after applying this merged catalog. This file is the resolved authority.
+Do not run the source rule sets independently after applying this merged catalog. This file is the resolved authority.
 
 ## 6. Additional merged coverage
 
