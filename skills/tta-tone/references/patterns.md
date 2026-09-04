@@ -169,7 +169,7 @@ Do not rewrite solely because of:
 - technical formality;
 - ordinary connectors used for real logic.
 
-## 5. Conflict resolutions between the source Skills
+## 5. Conflict resolutions
 
 - **“Inject soul” vs preservation:** personality is allowed only in new drafting when context supports it. Existing-text edits do not add personality that was absent.
 - **Vary rhythm vs evidence:** sentence-length variation is not a standalone target. Change rhythm only when repetition or clarity calls for it.
@@ -279,3 +279,12 @@ The first sentence should show who is doing what in which situation. Do not open
 ### Officialese and slogan jargon
 
 `砥砺前行`, `攻坚克难`, `齐心协力`, `底层逻辑`, `顶层设计`, `新质生产力`, `组合拳`, `全链路`, `破局` are empty in almost every occurrence. Name the concrete action or mechanism instead.
+
+### Chinese analysis tails and backdrop openers
+
+These Chinese forms back the corresponding `tone_check.py` rules:
+
+- Analysis tails appended to factual sentences: `从而确保`, `进而体现`, `进一步彰显`, `反映了更深层次的……`. Delete the tail unless the material supports that causal or interpretive step. The English equivalent is the trailing participle (`..., highlighting ...`).
+- Milestone framing: `标志着/代表着……重要（关键）一步/时刻/转折点`, `为……奠定（坚实）基础`, `具有……里程碑式意义`. Rewrite to the confirmed action, change, or result.
+- Backdrop openers: `在当今/在当前……时代/背景/环境下`, `随着……不断发展/演变`. Keep only when the backdrop has a concrete relation to what follows; otherwise start with the subject.
+- Unsupported significance: `彰显/凸显/体现了……重要性/意义/价值` needs material support, same as vague attribution.

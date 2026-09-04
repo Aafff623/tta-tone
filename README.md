@@ -2,7 +2,7 @@
 
 给 AI coding agent 和通用助手用的输出语言层 Skill:让每一条面向用户的自然语言回复直接、自然、少 AI 腔,同时保住事实、限定词、范围和技术字面量。对既有文稿只做最小修改,对新成稿按目标文风直接写对,不靠事后修饰。
 
-Skill 本名 `tta-tone`,源仓托管在本仓库(`tta-tone`)的 `skills/tta-tone/`。
+Skill 位于本仓库的 `skills/tta-tone/`。
 
 ## 三种模式
 

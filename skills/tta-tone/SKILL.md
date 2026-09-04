@@ -112,7 +112,7 @@ Return only the useful output. Do not emit a score or this checklist.
 ## References
 
 - [references/preservation-edit.md](references/preservation-edit.md): mandatory detailed constraints for substantial edits of existing text.
-- [references/patterns.md](references/patterns.md): merged pattern catalog, exceptions, and conflict resolutions from the two source Skills.
+- [references/patterns.md](references/patterns.md): merged pattern catalog, exceptions, and conflict resolutions across its source skills (sections 7–8 hold the drafting-oriented borrowings from oil-tone and tta-tone lint).
 - [references/examples.md](references/examples.md): calibration examples for coding-agent output and rewrite edge cases.
 
 For longer drafted prose, a checker script can scan for the known patterns below:
