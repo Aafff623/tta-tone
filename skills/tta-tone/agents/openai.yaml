@@ -1,3 +1,3 @@
 interface:
-  display_name: "Humanizer Tone"
+  display_name: "TTA Tone"
   short_description: "Natural, concise, low-AI-tone writing for agent output"

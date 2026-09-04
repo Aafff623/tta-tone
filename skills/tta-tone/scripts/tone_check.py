@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check Chinese/English copy for known humanizer-tone issues.
+"""Check Chinese/English copy for known tta-tone issues.
 
 FAIL  = confirmed issue (template lead-ins, hype jargon, officialese, chatbot
         residue, publication bait, fabricated-looking attribution).
@@ -277,7 +277,7 @@ def self_test() -> int:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Check copy for known humanizer-tone issues.")
+    parser = argparse.ArgumentParser(description="Check copy for known tta-tone issues.")
     parser.add_argument("files", nargs="*", help="UTF-8 files to scan, or - for stdin")
     parser.add_argument("--self-test", action="store_true")
     args = parser.parse_args()
@@ -299,7 +299,7 @@ def main() -> int:
             print(f"STRUCT  {name}:{line_number}: {line}\n      {fix}")
             warned = True
     if not failed and not warned:
-        print("PASS  no known humanizer-tone failures")
+        print("PASS  no known tta-tone failures")
     elif not failed:
         print("PASS  no confirmed failures; review warnings")
     return 1 if failed else 0

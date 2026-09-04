@@ -1,4 +1,4 @@
-# Humanizer Tone Examples
+# TTA Tone Examples
 
 Use these examples for calibration, not as fixed templates.
 

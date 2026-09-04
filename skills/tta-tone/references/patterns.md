@@ -1,4 +1,4 @@
-# Humanizer Tone Pattern Catalog
+# TTA Tone Pattern Catalog
 
 This catalog merges its source approaches into one hierarchy: the empirical, minimal-edit discipline of `lieflat-less-ai-tone`, the broader coverage of `humanizer-zh`, plus drafting-oriented patterns borrowed from oil-tone and tta-tone (sections 7–8).
 

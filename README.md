@@ -1,8 +1,8 @@
-# humanizer-tone
+# tta-tone
 
 给 AI coding agent 和通用助手用的输出语言层 Skill:让每一条面向用户的自然语言回复直接、自然、少 AI 腔,同时保住事实、限定词、范围和技术字面量。对既有文稿只做最小修改,对新成稿按目标文风直接写对,不靠事后修饰。
 
-Skill 本名 `humanizer-tone`,源仓托管在本仓库(`tta-tone`)的 `skills/humanizer-tone/`。
+Skill 本名 `tta-tone`,源仓托管在本仓库(`tta-tone`)的 `skills/tta-tone/`。
 
 ## 三种模式
 
@@ -24,7 +24,7 @@ Skill 本名 `humanizer-tone`,源仓托管在本仓库(`tta-tone`)的 `skills/hu
 - 名词化空壳动词(`进行了优化`)、重复限定、刻意反转(`不是……而是……`)。
 - 全文级结构:连续单句短段、设问偏多、加粗当拐棍。
 
-完整目录见 [skills/humanizer-tone/references/patterns.md](skills/humanizer-tone/references/patterns.md)。规则是检查线索,不是禁词表:单次出现且承担真实限定或逻辑作用时保留。
+完整目录见 [skills/tta-tone/references/patterns.md](skills/tta-tone/references/patterns.md)。规则是检查线索,不是禁词表:单次出现且承担真实限定或逻辑作用时保留。
 
 ## 安装
 
@@ -32,13 +32,13 @@ Skill 本名 `humanizer-tone`,源仓托管在本仓库(`tta-tone`)的 `skills/hu
 git clone https://github.com/Aafff623/tta-tone.git
 ```
 
-把 `skills/humanizer-tone/` 拷进你的 harness 的 skills 目录(已知兼容 `~/.agents/skills/`、`~/.claude/skills/`、`~/.cursor/skills/`,其他支持 Anthropic skill 格式的目录同样适用):
+把 `skills/tta-tone/` 拷进你的 harness 的 skills 目录(已知兼容 `~/.agents/skills/`、`~/.claude/skills/`、`~/.cursor/skills/`,其他支持 Anthropic skill 格式的目录同样适用):
 
 ```bash
-cp -R tta-tone/skills/humanizer-tone ~/.agents/skills/
+cp -R tta-tone/skills/tta-tone ~/.agents/skills/
 ```
 
-安装后,在下一轮任务中按 harness 的方式调用(如 `$humanizer-tone`)。
+安装后,在下一轮任务中按 harness 的方式调用(如 `$tta-tone`)。
 
 ## 使用
 
@@ -59,8 +59,8 @@ cp -R tta-tone/skills/humanizer-tone ~/.agents/skills/
 只用 Python 标准库。
 
 ```bash
-python skills/humanizer-tone/scripts/tone_check.py draft.md
-python skills/humanizer-tone/scripts/tone_check.py --self-test
+python skills/tta-tone/scripts/tone_check.py draft.md
+python skills/tta-tone/scripts/tone_check.py --self-test
 ```
 
 `FAIL` 是已确认问题,改完再运行;`WARN` 和 `STRUCT` 需要结合上下文判断,确有作用时可以保留。程序只能识别已知模式,不能判断事实,也不能代替通读。
@@ -69,7 +69,7 @@ python skills/humanizer-tone/scripts/tone_check.py --self-test
 
 ```text
 tta-tone/
-├── skills/humanizer-tone/
+├── skills/tta-tone/
 │   ├── agents/openai.yaml
 │   ├── references/patterns.md
 │   ├── references/preservation-edit.md
