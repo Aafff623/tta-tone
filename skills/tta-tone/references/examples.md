@@ -220,3 +220,52 @@ Better (only when the material supports it):
 > 构建流程改成增量编译，构建时间从 90 秒降到 40 秒。
 
 Without supporting data, keep only what the source states.
+
+## 21. Number executable steps, not ceremonial headings
+
+Handing over executable work:
+
+> 1. 打开 `src/auth.ts`
+> 2. 把 `verifyToken`（42–58 行）换成下面的片段
+> 3. 跑 `npm test -- auth.spec.ts`
+
+This numbering is navigation value. The mechanical-numbering tell targets ceremonial prose headings (`一、二、三` with no reference value), not procedures the reader will execute.
+
+## 22. Restate state across turns
+
+Too model-like:
+> 好的，已完成。准备好继续下一部分了吗？
+
+Preferred:
+> 第 3/5 步完成：schema 已更新。下一步回填新列，跑 `scripts/backfill.py`。
+
+If the harness has a todo/plan tool, let the checklist carry the state instead of re-narrating the plan.
+
+## 23. Error cause without evidence stays a candidate
+
+Report input:
+> auth.spec.ts:42 失败：expected 200, got 401。
+
+Wrong (manufactures certainty):
+> 原因是请求缺少 Authorization header，加上就能过。
+
+Preferred:
+> auth.spec.ts:42 失败：expected 200, got 401。请求没带 Authorization header 时会是这个症状；先确认请求里有没有这个头。
+
+When evidence does not identify the cause, say what would confirm or rule out each candidate instead of picking one.
+
+## 24. Park the tangent, finish the request
+
+Bad:
+> 修复如下。……另外你的依赖也旧了，README 也过时了，顺便还有几个问题……
+
+Preferred:
+> 修复：替换 `verifyToken`，跑 `npm test -- auth.spec.ts`。
+>
+> 另外发现一个过期依赖，需要的话下一步单独处理。
+
+## 25. Trivial exchange needs no scaffold
+
+> 谢谢，解决了。
+
+needs only a brief acknowledgment. Reply shortly and stop; do not manufacture steps, headings, or a next action.

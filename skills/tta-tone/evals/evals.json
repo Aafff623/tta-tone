@@ -96,6 +96,68 @@
         "The fact that verification happened only in a test environment is preserved",
         "No new data, source, or example is invented"
       ]
+    },
+    {
+      "id": 10,
+      "prompt": "我们正在做 5 步数据库迁移，现在第 3 步 schema 修改已经完成，下一步是回填新列。给我一条进度汇报。",
+      "expected_output": "A Chinese progress update that restates the current step out of the total, names the completed work concretely, and highlights one next action.",
+      "assertions": [
+        "The update states which step out of how many is complete",
+        "The completed work (schema change) is named concretely",
+        "The update ends with or highlights one concrete next action (backfilling)",
+        "The update does not re-narrate the entire plan"
+      ]
+    },
+    {
+      "id": 11,
+      "prompt": "集成测试挂了：auth.spec.ts:42，expected 200, got 401。帮我报告一下这个问题。",
+      "expected_output": "A matter-of-fact error report with location and observed values; causes are candidates because no cause evidence was supplied.",
+      "assertions": [
+        "The file and line of the failure are stated",
+        "The expected and actual values are preserved",
+        "Any cause offered is marked as a candidate or hypothesis, not asserted as confirmed",
+        "The report suggests a way to confirm the cause"
+      ]
+    },
+    {
+      "id": 12,
+      "prompt": "把 README.md 里的 'recieve' 拼写错误修掉。我这边还知道 package.json 里有个依赖很久没更新了，但这次先不用管。汇报一下。",
+      "expected_output": "A report that leads with the completed typo fix and mentions the stale dependency at most as a separate one-line note.",
+      "assertions": [
+        "The typo fix result is reported first",
+        "The stale dependency is not folded into the main fix narrative",
+        "The response does not expand the stale dependency into additional unrequested work"
+      ]
+    },
+    {
+      "id": 13,
+      "prompt": "把这个报错修复掉大概要多久？报错是 Node 的 ERR_MODULE_NOT_FOUND，缺一个路径别名。",
+      "expected_output": "A conditional estimate in concrete units grounded in stated assumptions, or an honest statement that it cannot be estimated yet.",
+      "assertions": [
+        "Any estimate uses concrete units such as minutes or hours, not vague phrases like 一点时间",
+        "The estimate is conditioned on stated assumptions or states what would change it",
+        "No false precision is invented without basis"
+      ]
+    },
+    {
+      "id": 14,
+      "prompt": "登录的 magic link 功能改完了，怎么跟同事说现在能用什么？",
+      "expected_output": "A concrete statement of what now works plus how to try it.",
+      "assertions": [
+        "The response states concretely what now works (magic link login)",
+        "The response includes a way to try or verify it such as a command, path, or URL",
+        "The response does not bury the working feature in a process recap"
+      ]
+    },
+    {
+      "id": 15,
+      "prompt": "谢谢，解决了。",
+      "expected_output": "A brief natural acknowledgment without manufactured structure.",
+      "assertions": [
+        "The response is short",
+        "The response does not add numbered steps, headings, or a manufactured next action",
+        "The response does not add a generic closing offer"
+      ]
     }
   ]
 }
