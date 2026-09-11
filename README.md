@@ -65,6 +65,15 @@ python skills/tta-tone/scripts/tone_check.py --self-test
 
 `FAIL` 是已确认问题,改完再运行;`WARN` 和 `STRUCT` 需要结合上下文判断,确有作用时可以保留。程序只能识别已知模式,不能判断事实,也不能代替通读。
 
+盲评评测流水线(移植自 i-have-adhd,维度按本 skill 重设,详见 [skills/tta-tone/evals/README.md](skills/tta-tone/evals/README.md)):
+
+```bash
+python skills/tta-tone/scripts/run_evals.py validate
+python -m unittest discover -s skills/tta-tone/tests
+```
+
+改 SKILL.md 后想拿分数说话,按 evals/README.md 的流程跑 baseline/candidate 配对盲评。
+
 ## 仓库结构
 
 ```text
@@ -75,7 +84,16 @@ tta-tone/
 │   ├── references/preservation-edit.md
 │   ├── references/examples.md
 │   ├── evals/evals.json
+│   ├── evals/cases.jsonl
+│   ├── evals/rubric.md
+│   ├── evals/runners.example.json
+│   ├── evals/README.md
 │   ├── scripts/tone_check.py
+│   ├── scripts/run_evals.py
+│   ├── scripts/judge.py
+│   ├── scripts/claude_isolated.py
+│   ├── scripts/openai_runner.py
+│   ├── tests/test_judge.py
 │   └── SKILL.md
 ├── LICENSE
 └── README.md
