@@ -227,7 +227,13 @@ class EndToEndTest(unittest.TestCase):
                             # Reads the prompt from stdin, not argv: a trailing
                             # option such as `--tools ""` otherwise swallows a
                             # prompt appended to the command line.
-                            "command": ["sh", "-c", f"cat > {captured.as_posix()}; cat {payload.as_posix()}"],
+                            "command": [
+                                sys.executable,
+                                "-c",
+                                "import pathlib,sys; pathlib.Path(sys.argv[1]).write_text(sys.stdin.read()); print(pathlib.Path(sys.argv[2]).read_text())",
+                                str(captured),
+                                str(payload),
+                            ],
                             "response_format": "text",
                         }
                     }
@@ -295,12 +301,10 @@ class EndToEndTest(unittest.TestCase):
                     {
                         "stub": {
                             "command": [
-                                "sh",
+                                sys.executable,
                                 "-c",
-                                # `blocker` omitted for the casual-message group.
-                                f'p=$(cat); case "$p" in *casual-message*)'
-                                f' echo \'{{"A":{{"correctness":3}},"B":{{"correctness":3}}}}\';;'
-                                f" *) cat {good.as_posix()};; esac",
+                                "import pathlib,sys; p=sys.stdin.read(); print('{\"A\":{\"correctness\":3},\"B\":{\"correctness\":3}}' if 'casual-message' in p else pathlib.Path(sys.argv[1]).read_text())",
+                                str(good),
                             ],
                             "response_format": "text",
                         }
@@ -348,7 +352,7 @@ class EndToEndTest(unittest.TestCase):
                 json.dumps(
                     {
                         "stub": {
-                            "command": ["sh", "-c", "exit 99"],
+                            "command": [sys.executable, "-c", "raise SystemExit(99)"],
                             "response_format": "text",
                         }
                     }
@@ -394,9 +398,10 @@ class EndToEndTest(unittest.TestCase):
                     {
                         "stub": {
                             "command": [
-                                "sh",
+                                sys.executable,
                                 "-c",
-                                f'p=$(cat); case "$p" in *direct-answer*) exit 7;; *) cat {verdict.as_posix()};; esac',
+                                "import pathlib,sys; p=sys.stdin.read(); sys.exit(7) if 'direct-answer' in p else print(pathlib.Path(sys.argv[1]).read_text())",
+                                str(verdict),
                             ],
                             "response_format": "text",
                         }

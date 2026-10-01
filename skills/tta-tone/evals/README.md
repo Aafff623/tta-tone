@@ -9,11 +9,20 @@
 
 两者重叠的用例内容必须一致：改任何一边，同步改另一边（与 tone_check.py ↔ patterns.md 的镜像纪律相同）。
 
+路由回归用例覆盖 Direct / Casual、Preservation Edit、Agent Output、Free Draft，以及“只给结果但仍须保护源文本”的混合请求。新增 expression/meme 用例检查：每条自然语言回复有表达标记、错误和安全场景使用克制符号、梗不会覆盖不确定性或风险。盲评应同时观察最终答案质量和路由是否导致结构、范围或技术字面量回归。
+
 ## 验证与规划
 
 ```bash
 python scripts/run_evals.py validate
 python scripts/run_evals.py plan --trials 3
+```
+
+既有文稿的静态守恒检查不依赖模型：
+
+```bash
+python scripts/preservation_check.py source.md edited.md
+python scripts/validate_catalog.py
 ```
 
 ## 跑分（以本地 InferX 免费端点为例）

@@ -2,6 +2,8 @@
 
 This catalog merges its source approaches into one hierarchy: the empirical, minimal-edit discipline of `lieflat-less-ai-tone`, the broader coverage of `humanizer-zh`, plus drafting-oriented patterns borrowed from oil-tone and tta-tone (sections 7–8).
 
+The catalog is consulted after routing. Strong patterns are still subject to the mode contract: Preservation Edit changes only confirmed local problems, Agent Output uses the patterns to keep reports concrete and actionable, and Free Draft may reorganize supported material. Direct / Casual uses only the patterns needed to answer the immediate request. A pattern match never overrides an explicit output contract or a real source constraint.
+
 ## 1. Strong patterns
 
 ### Fake reversal and contrast

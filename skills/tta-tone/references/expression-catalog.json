@@ -1,0 +1,53 @@
+{
+  "schema": "tta-tone-expression/1.0",
+  "default_limit_per_response": 1,
+  "roles": {
+    "acknowledge": {
+      "emoji": ["✅"],
+      "kaomoji": ["(｀・ω・´)ゞ", "(￣^￣)ゞ", "(｡•̀ᴗ-)✧"]
+    },
+    "inspect": {
+      "emoji": ["🔍"],
+      "kaomoji": ["(・_・ヾ", "(｀・ω・´)"]
+    },
+    "uncertain": {
+      "emoji": ["🤔"],
+      "kaomoji": ["(・・;)", "(￣～￣;)", "(｡•́︿•̀｡)"]
+    },
+    "progress": {
+      "emoji": ["🛠️", "🚧"],
+      "kaomoji": ["(￣▽￣)ノ", "(￣ω￣;)"]
+    },
+    "error": {
+      "emoji": ["⚠️"],
+      "kaomoji": ["(；´д｀)ゞ", "(╥﹏╥)"]
+    },
+    "risk": {
+      "emoji": ["⚠️", "🛑", "🔒"],
+      "kaomoji": ["(ಠ_ಠ)", "(；ﾟДﾟ)"]
+    },
+    "action": {
+      "emoji": ["🔧"],
+      "kaomoji": ["(ง •̀_•́)ง", "(｀・ω・´)b"]
+    },
+    "explain": {
+      "emoji": ["💡"],
+      "kaomoji": ["( •̀ω•́ )✧", "(・_・ヾ"]
+    },
+    "friendly": {
+      "emoji": ["🙏", "☕️"],
+      "kaomoji": ["(｡•̀ᴗ-)✧", "(人 •͈ᴗ•͈)", "(づ｡◕‿‿◕｡)づ"]
+    },
+    "playful": {
+      "emoji": ["✨", "🎉", "🐱"],
+      "kaomoji": ["(≧▽≦)", "٩(ˊᗜˋ*)و", "(=^･ω･^=)"]
+    }
+  },
+  "policy": {
+    "preservation_edit_default": "plain_outside_source_only",
+    "machine_payload": "literal_only",
+    "adjacent_repeat": false,
+    "celebratory_on_unverified": false,
+    "meme_frequency": "lower_than_expression"
+  }
+}

@@ -280,6 +280,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Check copy for known tta-tone issues.")
     parser.add_argument("files", nargs="*", help="UTF-8 files to scan, or - for stdin")
     parser.add_argument("--self-test", action="store_true")
+    parser.add_argument("--mode", choices=("direct", "preservation", "agent", "draft"), default="draft", help="Review context; matches are advisory because regex cannot prove a semantic violation")
     args = parser.parse_args()
     if args.self_test:
         return self_test()
@@ -290,12 +291,12 @@ def main() -> int:
     for name in args.files:
         content = read_text(name)
         for line_number, line, fix in find_failures(content):
-            print(f"FAIL  {name}:{line_number}: {line}\n      {fix}")
+            print(f"FAIL  [{args.mode}] {name}:{line_number}: {line}\n      {fix}")
             failed = True
         for line_number, line, fix in find_warnings(content):
             print(f"WARN  {name}:{line_number}: {line}\n      {fix}")
             warned = True
-        for line_number, line, fix in find_structural(content):
+        for line_number, line, fix in (find_structural(content) if args.mode == "draft" else []):
             print(f"STRUCT  {name}:{line_number}: {line}\n      {fix}")
             warned = True
     if not failed and not warned:

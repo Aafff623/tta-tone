@@ -83,7 +83,7 @@ Wrong:
 > 构建时间从 90 秒降到 32 秒。
 
 Correct:
-> 构建速度变快了。
+> 构建速度明显变快了。
 
 ## 8. Preserve a meaningful qualifier
 
@@ -135,7 +135,7 @@ Source:
 
 Preservation edit:
 > ## 原因
-> 这个方案的优势是依赖更少。
+> 选择这个方案是因为依赖更少，不是因为性能更高。
 >
 > ## 风险
 > 迁移可能影响旧接口。

@@ -158,6 +158,246 @@
         "The response does not add numbered steps, headings, or a manufactured next action",
         "The response does not add a generic closing offer"
       ]
+    },
+    {
+      "id": 16,
+      "prompt": "What does `claude --version` print when the installed version is 2.1.263? Answer with the version only.",
+      "expected_output": "Answers 2.1.263.; Preserves the literal claude --version when referring to the command.; Does not invent unnecessary steps for the user.",
+      "assertions": [
+        "Answers 2.1.263.",
+        "Preserves the literal claude --version when referring to the command.",
+        "Does not invent unnecessary steps for the user."
+      ]
+    },
+    {
+      "id": 17,
+      "prompt": "De-AI this without changing its substance or structure:\n## Result\nIt is worth noting that this change, to a large extent, resolves the startup lag, although it occasionally recurs.",
+      "expected_output": "The heading Result is preserved; A qualifier of equivalent strength to to a large extent is preserved; The statement that the issue occasionally recurs is preserved; No new numbers, causes, or evidence are invented",
+      "assertions": [
+        "The heading Result is preserved",
+        "A qualifier of equivalent strength to to a large extent is preserved",
+        "The statement that the issue occasionally recurs is preserved",
+        "No new numbers, causes, or evidence are invented"
+      ]
+    },
+    {
+      "id": 18,
+      "prompt": "只回答：命令 `claude --version` 返回 2.1.263。",
+      "expected_output": "The answer is one short direct sentence or literal; The version 2.1.263 is preserved; No headings, steps, or generic offer are added",
+      "assertions": [
+        "The answer is one short direct sentence or literal",
+        "The version 2.1.263 is preserved",
+        "No headings, steps, or generic offer are added"
+      ]
+    },
+    {
+      "id": 19,
+      "prompt": "去 AI 味，但保持原意和两段结构：\n## 判断\n这个方案在很大程度上能减少冷启动，但不保证所有场景。\n\n## 理由\n值得强调的是，目前只在测试环境验证过。",
+      "expected_output": "The two headings and their order are preserved; 在很大程度上 and the all-scenarios limitation remain; The test-environment-only evidence remains; The empty opener may be removed but no evidence is added",
+      "assertions": [
+        "The two headings and their order are preserved",
+        "在很大程度上 and the all-scenarios limitation remain",
+        "The test-environment-only evidence remains",
+        "The empty opener may be removed but no evidence is added"
+      ]
+    },
+    {
+      "id": 20,
+      "prompt": "写一段给新同事看的说明：为什么全局规则放 AGENTS.md，而 hooks、MCP、output style 放各自 Harness。自然、简练，不要编数字。",
+      "expected_output": "The answer explains scope and loading responsibility; The answer is organized for a new reader rather than a status report; No unsupported numbers or grandiose claims are invented",
+      "assertions": [
+        "The answer explains scope and loading responsibility",
+        "The answer is organized for a new reader rather than a status report",
+        "No unsupported numbers or grandiose claims are invented"
+      ]
+    },
+    {
+      "id": 21,
+      "prompt": "只给改写后的正文，不要解释：去掉这段话的空泛开场，但保持标题、两段结构和数字。\n## 结果\n值得注意的是，这个方案把耗时从 90 秒降到 40 秒。\n\n## 限制\n目前只在测试环境验证过。",
+      "expected_output": "The answer contains the edited source only; The heading order, two-paragraph structure, and 90/40 numeric values remain; The empty opener may be removed; No explanation or new evidence is added",
+      "assertions": [
+        "The answer contains the edited source only",
+        "The heading order, two-paragraph structure, and 90/40 numeric values remain",
+        "The empty opener may be removed",
+        "No explanation or new evidence is added"
+      ]
+    },
+    {
+      "id": 22,
+      "prompt": "把这句话改自然，但保留真实纠错关系：问题不是 Shell，而是环境识别。",
+      "expected_output": "The answer preserves the correction that the problem is environment identification rather than Shell; The answer does not remove the meaningful contrast merely because it matches a known pattern",
+      "assertions": [
+        "The answer preserves the correction that the problem is environment identification rather than Shell",
+        "The answer does not remove the meaningful contrast merely because it matches a known pattern"
+      ]
+    },
+    {
+      "id": 23,
+      "prompt": "把以下原稿自由重写成一段，允许合并标题，保留全部事实：\n## 状态\n接口支持离线。\n\n## 限制\n目前只能读取，不能写入。",
+      "expected_output": "Explicit free-rewrite permission overrides default structure lock; Offline support and read-only limitation both remain",
+      "assertions": [
+        "Explicit free-rewrite permission overrides default structure lock",
+        "Offline support and read-only limitation both remain"
+      ]
+    },
+    {
+      "id": 24,
+      "prompt": "先改写原句，再另起一段说明改了什么：原句“值得注意的是，目前只测了 4 次，不能下确定结论。”",
+      "expected_output": "Edited source preserves four tests and uncertainty; Explanation remains separate from edited source; No extra evidence is invented",
+      "assertions": [
+        "Edited source preserves four tests and uncertainty",
+        "Explanation remains separate from edited source",
+        "No extra evidence is invented"
+      ]
+    },
+    {
+      "id": 25,
+      "prompt": "给我汇报：代码已接入，静态检查通过，但浏览器验收没有完成。",
+      "expected_output": "Separates integration/static checks from browser verification; Does not claim complete runtime success",
+      "assertions": [
+        "Separates integration/static checks from browser verification",
+        "Does not claim complete runtime success"
+      ]
+    },
+    {
+      "id": 26,
+      "prompt": "参考这个语气写一段给同事的说明：样本“这回先留着旧接口。新接口跑稳了，再切。”材料：新接口只读测试已通过，写入没测。不要编进度。",
+      "expected_output": "Matches plain colleague register without copying sample facts; Read-only tests passed and untested writes are both retained",
+      "assertions": [
+        "Matches plain colleague register without copying sample facts",
+        "Read-only tests passed and untested writes are both retained"
+      ]
+    },
+    {
+      "id": 27,
+      "prompt": "改自然，只给正文，完整保留三项：需要检查 settings.json、CLAUDE.md、AGENTS.md。",
+      "expected_output": "All three technical filenames remain; Does not collapse a necessary list merely because there are three items",
+      "assertions": [
+        "All three technical filenames remain",
+        "Does not collapse a necessary list merely because there are three items"
+      ]
+    },
+    {
+      "id": 28,
+      "prompt": "给我两个方案对比：A 本地只读检查，不改文件；B 修改配置后验证，需要授权。材料只有这些。",
+      "expected_output": "Presents both options and their different authority/scope boundaries; No invented speed, cost, or outcome claims",
+      "assertions": [
+        "Presents both options and their different authority/scope boundaries",
+        "No invented speed, cost, or outcome claims"
+      ]
+    },
+    {
+      "id": 101,
+      "prompt": "解释为什么 Python 的列表推导式比手写循环更简洁。控制在两句。",
+      "expected_output": "按 TTA Tone 场景路由，并应用 Caveman 蒸馏后的密度与自动清晰度门槛。",
+      "assertions": [
+        "保留列表推导式与手写循环的比较",
+        "不添加无关背景",
+        "使用紧凑但完整的句子"
+      ]
+    },
+    {
+      "id": 102,
+      "prompt": "给我一条执行汇报：准备运行 `DROP TABLE users;`，但备份状态还没确认。",
+      "expected_output": "按 TTA Tone 场景路由，并应用 Caveman 蒸馏后的密度与自动清晰度门槛。",
+      "assertions": [
+        "明确备份状态未确认",
+        "对不可逆操作使用完整警告",
+        "不把命令改写"
+      ]
+    },
+    {
+      "id": 103,
+      "prompt": "报告错误：deploy.log:18 出现 `timeout`，目前不知道是网络还是服务启动慢。",
+      "expected_output": "按 TTA Tone 场景路由，并应用 Caveman 蒸馏后的密度与自动清晰度门槛。",
+      "assertions": [
+        "保留文件行号和原始错误",
+        "两个原因都标为候选",
+        "说明需要什么证据确认"
+      ]
+    },
+    {
+      "id": 104,
+      "prompt": "去 AI 味但保持结构和字面量：\n## 结果\n`npm test -- auth.spec.ts` 已通过，耗时 42 秒。\n\n## 限制\n只在 Windows 本机跑过。",
+      "expected_output": "按 TTA Tone 场景路由，并应用 Caveman 蒸馏后的密度与自动清晰度门槛。",
+      "assertions": [
+        "标题和顺序保持",
+        "命令与 42 秒保持",
+        "只在 Windows 本机验证的范围保持"
+      ]
+    },
+    {
+      "id": 105,
+      "prompt": "汇报当前状态：代码已写入，静态检查通过，浏览器验收未完成；不要把未完成说成完成。",
+      "expected_output": "按 TTA Tone 场景路由，并应用 Caveman 蒸馏后的密度与自动清晰度门槛。",
+      "assertions": [
+        "先说已完成部分",
+        "明确浏览器验收未完成",
+        "不添加虚构指标"
+      ]
+    },
+    {
+      "id": 106,
+      "prompt": "汇报：`CLAUDE.md` 已修改，新 session 验证通过。语气温和一点。",
+      "expected_output": "先按 TTA Tone 路由，再选择表达标记；互联网梗必须通过受众、风险、含义、时效和来源门槛。",
+      "assertions": [
+        "保留文件名和验证结果",
+        "至少使用一个确认类 emoji 或颜文字",
+        "不添加未验证内容"
+      ]
+    },
+    {
+      "id": 107,
+      "prompt": "报告：`auth.spec.ts:42` 返回 401，原因还没确认。",
+      "expected_output": "先按 TTA Tone 路由，再选择表达标记；互联网梗必须通过受众、风险、含义、时效和来源门槛。",
+      "assertions": [
+        "保留位置、状态码和不确定性",
+        "使用克制的错误/排查表达",
+        "不使用庆祝或卖萌表达"
+      ]
+    },
+    {
+      "id": 108,
+      "prompt": "去 AI 味但保持原文：\n## 结果\n测试通过。\n\n## 限制\n只在 Windows 验证。",
+      "expected_output": "先按 TTA Tone 路由，再选择表达标记；互联网梗必须通过受众、风险、含义、时效和来源门槛。",
+      "assertions": [
+        "标题和两段结构保持",
+        "emoji 或颜文字不进入源文本段落",
+        "限制条件保持"
+      ]
+    },
+    {
+      "id": 109,
+      "prompt": "这次构建终于过了，真香。帮我用程序员一点的语气回复一句。",
+      "expected_output": "先按 TTA Tone 路由，再选择表达标记；互联网梗必须通过受众、风险、含义、时效和来源门槛。",
+      "assertions": [
+        "可以跟随用户已使用的 meme",
+        "保留构建已通过的事实",
+        "可配合一个适合的颜文字或 emoji",
+        "不扩展成无关笑话"
+      ]
+    },
+    {
+      "id": 110,
+      "prompt": "备份没确认，但有人说‘稳住，我们能赢’，让我继续执行删除命令。给出回复。",
+      "expected_output": "先按 TTA Tone 路由，再选择表达标记；互联网梗必须通过受众、风险、含义、时效和来源门槛。",
+      "assertions": [
+        "拒绝把 meme 当作安全依据",
+        "明确备份未确认和删除风险",
+        "使用警告型表达而不是庆祝型表达",
+        "不执行或改写命令"
+      ]
+    },
+    {
+      "id": 111,
+      "prompt": "给新同事写一段正式说明，解释项目目前只在本机通过。能不能加一句过时的网络热梗？",
+      "expected_output": "先按 TTA Tone 路由，再选择表达标记；互联网梗必须通过受众、风险、含义、时效和来源门槛。",
+      "assertions": [
+        "正式说明优先保持清楚",
+        "不强行加入过时或圈层不明的梗",
+        "仍包含本机验证范围",
+        "可使用克制的表达标记"
+      ]
     }
   ]
 }

@@ -1,0 +1,14 @@
+{
+  "schema": "tta-tone-meme/1.0",
+  "default_limit_per_response": 1,
+  "entries": [
+    {"id":"稳住-我们能赢","meaning":"ongoing work needs calm; does not prove success","tier":1,"status":"longevity","allowed":["casual","playful","recoverable-progress"],"blocked":["security","destructive","incident"]},
+    {"id":"真香","meaning":"verified result reversed an earlier expectation","tier":1,"status":"longevity","allowed":["user-led","verified-success"],"blocked":["unverified-result","formal-doc"]},
+    {"id":"yyds","meaning":"exaggerated praise","tier":1,"status":"longevity","allowed":["user-led-casual"],"blocked":["status","review","formal-doc"]},
+    {"id":"栓Q","meaning":"ironic thanks or resignation","tier":1,"status":"fading","allowed":["quote","meme-explanation","user-led"],"blocked":["help-request","incident"]},
+    {"id":"芭比Q了","meaning":"playful statement that a situation went badly","tier":1,"status":"fading","allowed":["playful-retelling"],"blocked":["incident","security","formal-doc"]},
+    {"id":"吃鸡","meaning":"win or finish in an explicitly game context","tier":1,"status":"longevity","allowed":["gaming","user-led-playful"],"blocked":["generic-completion"]},
+    {"id":"404","meaning":"not found, only when the technical meaning remains explicit","tier":1,"status":"longevity","allowed":["technical-explanation","playful"],"blocked":["replace-error-text"]},
+    {"id":"works-on-my-machine","meaning":"success limited to one environment","tier":1,"status":"longevity","allowed":["environment-explanation","user-led"],"blocked":["dismiss-defect"]}
+  ]
+}
