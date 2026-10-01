@@ -4,17 +4,28 @@
 
 Skill 位于本仓库的 `skills/tta-tone/`。
 
-## 三种模式
+规则链在对话开始加载，执行期间每次回复和最终汇报都重新经过场景路由与输出自检；首次加载不能替代后续执行。公共规则定义输出契约，项目 `AGENTS.md`/`CLAUDE.md` 引用 Skill 并补充仓库边界，`CONTEXT.md` 记录维护事实。该约束属于指令层，不能保证模型永不偏离，也不等于已实现 Hook 拦截。
+
+## 按场景路由的四种模式
 
 | 模式 | 何时用 | 纪律 |
 | --- | --- | --- |
-| Agent Output(默认) | 会话回复、状态汇报、评审、计划、交接 | 结果先行,短段落或 2–6 条紧凑要点 |
+| Direct / Casual | 短问答、致谢、明确要求只给一个值 | 只回答所问,不制造结构 |
 | Preservation Edit | 用户要求去 AI 味、润色既有文稿 | 最小修改,不动结构、事实、语气 |
-| Free Draft | 起草新文稿、用户允许大改 | 允许重组,但不编造事实和伪人味 |
+| Agent Output | 会话回复、状态汇报、评审、计划、交接 | 结果先行,状态和下一步清楚 |
+| Free Draft | 起草新文稿、用户允许大改 | 按读者和体裁重组,不编造事实 |
+
+四种模式共享同一层事实、范围、限定词、因果和技术字面量保护规则;模式决定结构和改写权限，输出密度在路由后单独选择。路由和冲突处理见 [skills/tta-tone/references/routing.md](skills/tta-tone/references/routing.md)。
+
+输出密度在路由之后单独选择：`Normal` 保持完整语法，`Tight` 去掉重复框架，`Compressed` 只在顺序和因果仍清楚时使用。安全警告、不可逆操作、多步顺序和证据不足的片段自动恢复完整表达；密度规则不等于上下文压缩，也不能单独证明 token 或成本下降。Caveman 的蒸馏取舍和 pinned revision 见 [skills/tta-tone/references/distillation.md](skills/tta-tone/references/distillation.md)。
+
+Emoji、颜文字和互联网梗属于独立的表达层。每条自然语言回复都带一个场景匹配的表达标记；梗的使用频率低于 emoji/颜文字，并经过受众、风险、含义、时效和来源检查。规则与小型词库见 [expression-catalog.md](skills/tta-tone/references/expression-catalog.md) 和 [meme-catalog.md](skills/tta-tone/references/meme-catalog.md)。
 
 规则冲突时按序裁决:事实与用户本轮要求 > 因果/时间线/范围完整 > 含义与结构 > 节奏排版。
 
 ## 它会检查什么
+
+每条面向用户的自然语言回复必须包含至少一个适合场景的 emoji 或颜文字，通常一条回复用一个。闲聊可用颜文字，技术解释用语义符号，错误和安全警告使用克制的风险符号。符号不进入代码、命令、日志、机器数据或受保护原文；后续明确要求无表情或精确格式时遵从该要求。
 
 - 空泛开场和模板领起语(`说白了`、`值得注意的是`、`原因很简单`)。
 - 宣传黑话、政经套话和官腔(`赋能`、`抓手`、`底层逻辑`、`砥砺前行`)。
@@ -61,9 +72,11 @@ cp -R tta-tone/skills/tta-tone ~/.agents/skills/
 ```bash
 python skills/tta-tone/scripts/tone_check.py draft.md
 python skills/tta-tone/scripts/tone_check.py --self-test
+python skills/tta-tone/scripts/preservation_check.py source.md edited.md
+python skills/tta-tone/scripts/validate_catalog.py
 ```
 
-`FAIL` 是已确认问题,改完再运行;`WARN` 和 `STRUCT` 需要结合上下文判断,确有作用时可以保留。程序只能识别已知模式,不能判断事实,也不能代替通读。
+语气扫描的 `FAIL` 是明确命中的问题，`WARN` 和 `STRUCT` 需要结合上下文判断，不因提示就机械改写；用 `--mode direct|preservation|agent|draft` 指定场景，全文结构提示仅用于 draft。守恒检查的 `FAIL` 表示检测到结构或字面量变化，仍须检查是否有明确改写授权。两种脚本都不能证明语义等价。
 
 盲评评测流水线(移植自 i-have-adhd,维度按本 skill 重设,详见 [skills/tta-tone/evals/README.md](skills/tta-tone/evals/README.md)):
 
@@ -74,6 +87,8 @@ python -m unittest discover -s skills/tta-tone/tests
 
 改 SKILL.md 后想拿分数说话,按 evals/README.md 的流程跑 baseline/candidate 配对盲评。
 
+五个 Caveman × TTA Tone 场景的默认/润色对照见 [skills/tta-tone/references/caveman-comparison.md](skills/tta-tone/references/caveman-comparison.md)，用于行为回归示例，不冒充模型或 provider 实测。
+
 ## 仓库结构
 
 ```text
@@ -83,17 +98,26 @@ tta-tone/
 │   ├── references/patterns.md
 │   ├── references/preservation-edit.md
 │   ├── references/examples.md
+│   ├── references/routing.md
+│   ├── references/distillation.md
+│   ├── references/caveman-comparison.md
+│   ├── references/expression-catalog.md
+│   ├── references/meme-catalog.md
+│   ├── references/expression-catalog.json
+│   ├── references/meme-catalog.json
 │   ├── evals/evals.json
 │   ├── evals/cases.jsonl
 │   ├── evals/rubric.md
 │   ├── evals/runners.example.json
 │   ├── evals/README.md
 │   ├── scripts/tone_check.py
+│   ├── scripts/preservation_check.py
 │   ├── scripts/run_evals.py
 │   ├── scripts/judge.py
 │   ├── scripts/claude_isolated.py
 │   ├── scripts/openai_runner.py
 │   ├── tests/test_judge.py
+│   ├── tests/test_preservation_check.py
 │   └── SKILL.md
 ├── LICENSE
 └── README.md
